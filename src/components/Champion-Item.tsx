@@ -1,14 +1,23 @@
-import {useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
 import TextToSpeech from "./TextToSpeech"
 import Champion from "../interfaces/Champion.ts"
 import axios from "axios";
-import.meta.env.VITE_RIOT_STORIES_JSON
-import.meta.env.VITE_RIOT_STORIES_JSON_END
-const ChampionItem = ({idChamp}) => {
+
+interface ChampionItemProps{
+    idChamp:string
+}
+
+interface RelatedChamp{
+    id:string
+    key:number
+    name:string
+}
+
+const ChampionItem: React.FC<ChampionItemProps> = ({idChamp}) => {
     const [champion, setChampion] = useState<Champion>(initChampion());
     const [championLoading, setChampionLoading] = useState<boolean>(false);
 
-    const getChampion = async (idChamp) => {
+    const getChampion = async (idChamp:string) => {
         try{
             const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion/${idChamp}.json`,
                 {
@@ -18,12 +27,23 @@ const ChampionItem = ({idChamp}) => {
                 })
 
             const data = await response.data
-            const champion = data.firstElementChild
-            console.log("Data Champion : ",champion)
+            const championData = data.data[idChamp]
+
+            if(championData !== undefined){
+                console.log("Fetching Champion Detail SUCCESS")
+                console.log(championData)
+            }
 
             setChampion((prevChampion) => ({
                 ...prevChampion,
-                champion
+                id:championData.id,
+                key:championData.key,
+                name: championData.name,
+                title : championData.title,
+                //TODO images
+                //TODO Skins boucle -> nums
+                //TODO allyTips
+                //TODO enemyTips
             }));
 
         }catch (error){
@@ -32,23 +52,32 @@ const ChampionItem = ({idChamp}) => {
     }
     const getChampionStory = async () => {
         try{
-            const jsonStoryLink = `${process.env.REACT_APP_RIOT_STORIES_JSON}${champion.id}${process.env.REACT_APP_RIOT_STORIES_JSON_END}`;
-            console.log(jsonStoryLink)
+            const jsonStoryLink = `https://universe-meeps.leagueoflegends.com/v1/fr_fr/champions/${idChamp.toLowerCase()}/index.json`;
             const response = await fetch(jsonStoryLink)
             const data = await response.json()
-            console.log(data)
+
+            const dataChamp = data['champion']
+            console.log(dataChamp)
+
+            const dataRelatedChampions = data['related-champions']
+            console.log(dataRelatedChampions)
+            const relatedChampions:RelatedChamp[] = dataRelatedChampions.map((champ:RelatedChamp) => ({
+                id: champ.id,
+                key: champ.key,
+                name: champ.name
+            }));
 
 
-
-            // setChampion((prevChampion) => ({
-            //     ...prevChampion,
-            //     fullLore: story,
-            // }));
+            setChampion((prevChampion) => ({
+                ...prevChampion,
+                shortLore: dataChamp['biography']['short'],
+                fullLore: dataChamp['biography']['full'],
+                quote: dataChamp['biography']['quote']
+            }));
         }catch (error){
             console.error('Error : ',error)
         }
     }
-
     function initChampion():Champion{
         console.log('Initialising champion')
         return{
@@ -56,9 +85,11 @@ const ChampionItem = ({idChamp}) => {
             key: 0,
             name: '',
             title: '',
+            'released-date': null,
             region: '',
             shortLore: '',
             fullLore: '',
+            quote: '',
             image:{
                 full: '',
                 loading: '',
@@ -67,13 +98,14 @@ const ChampionItem = ({idChamp}) => {
             skins: [],
             allyTips:[],
             enemyTips: [],
-            tags: [],
+            roles: [],
             spells:[],
             passive: {
                 name: '',
                 description: '',
                 image: '',
-            }
+            },
+            'related-champions': []
         }
     }
 
@@ -83,7 +115,12 @@ const ChampionItem = ({idChamp}) => {
     }, []);
 
     useEffect(() => {
-        if(champion.fullLore !== ''){
+
+        console.log("Champion id :", champion.id)
+        console.log("Champion key :", champion.key)
+
+
+        if(champion.fullLore !== '' && champion.shortLore !== '' && champion.quote !== ''){
             setChampionLoading(true);
         }
     }, [champion]);
@@ -93,11 +130,13 @@ const ChampionItem = ({idChamp}) => {
 
     return (
         <div>
-            <h1>Champion Item</h1>
+            <h1>{champion.name}</h1>
             {championLoading ? (
                 <>
+                    <p className="mb-3">{champion?.quote}</p>
+                    <p className="mb-3">{champion?.shortLore}</p>
+                    <div className="mb-3" dangerouslySetInnerHTML={{ __html: champion?.fullLore }} />
                     <TextToSpeech text={champion?.fullLore ?? ''} />
-                    <p>{champion?.shortLore}</p>
                 </>
                 ) : 'Loading...'}
         </div>

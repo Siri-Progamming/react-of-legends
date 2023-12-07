@@ -3,9 +3,11 @@ interface Champion {
     key?: number | 0;
     name?: string | '';
     title?: string | '';
+    'released-date'?: Date | null;
     region?: string | '';
     shortLore?: string | '';
     fullLore?: string | '';
+    quote?: string | '',
     image: {
         full?: string | '';
         loading?: string | '';
@@ -19,7 +21,7 @@ interface Champion {
     }> | [];
     allyTips?: Array<string> | [];
     enemyTips?: Array<string> | [];
-    tags?: Array<string> | [];
+    roles?: Array<string> | [];
     spells?: Array<{
         id?: string | '';
         name?: string | '';
@@ -31,5 +33,6 @@ interface Champion {
         description?: string | '';
         image?: string | '';
     };
+    'related-champions': Array<string> | []
 }
 export default Champion;

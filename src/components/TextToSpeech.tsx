@@ -3,10 +3,10 @@ interface TextToSpeechProps {
     text: string;
 }
 const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
-    const [textToSpeak, setTextToSpeak] = useState<string>(text)
+    const [textToSpeak] = useState<string>(removeHtmlTags(text))
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
-    const [speech, setSpeech] = useState<SpeechSynthesisUtterance>(new SpeechSynthesisUtterance(textToSpeak))
+    const [speech] = useState<SpeechSynthesisUtterance>(new SpeechSynthesisUtterance(textToSpeak))
     const handleSpeak = () => {
         if('speechSynthesis' in window){
             window.speechSynthesis.speak(speech);
@@ -47,10 +47,13 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
         }
     }, [])
 
+    function removeHtmlTags(text:string):string{
+        const doc = new DOMParser().parseFromString(text, 'text/html');
+        return doc.body.textContent || "";
+    }
 
     return (
         <div>
-            <p className="font-[ApercuRegular]">{textToSpeak}</p>
             {isPaused && textToSpeak !== '' ? <button onClick={handleResumeSpeak}>Reprendre</button> : <button onClick={handleSpeak}>Lecture</button>}
             {isSpeaking && <button onClick={handleStopSpeak}>Stop</button>}
             {isSpeaking && <button onClick={handlePauseSpeak}>Pause</button>}
