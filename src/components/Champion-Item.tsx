@@ -1,58 +1,59 @@
-import {useEffect, useState} from "react";
-import axios from 'axios';
-import * as cheerio from 'cheerio';
-import TextToSpeech from "./TextToSpeech";
-import Champion from "../interfaces/Champion.ts";
-const ChampionItem = () => {
+import {useEffect, useState} from "react"
+import TextToSpeech from "./TextToSpeech"
+import Champion from "../interfaces/Champion.ts"
+import axios from "axios";
+import.meta.env.VITE_RIOT_STORIES_JSON
+import.meta.env.VITE_RIOT_STORIES_JSON_END
+const ChampionItem = ({idChamp}) => {
     const [champion, setChampion] = useState<Champion>(initChampion());
     const [championLoading, setChampionLoading] = useState<boolean>(false);
 
-    // const getChampion = async () => {
-    //     try{
-    //         // const response = await fetch(`https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion/Lulu.json`)
-    //         // const data = await response.json()
-    //         // const champion = data.data.firstElementChild
-    //         // setChampion(champion)
-    //         // console.log(champion)
-    //
-    //     }catch (error){
-    //         console.error('Error : ',error)
-    //     }
-    // }
-    const getChampionStory = async () => {
+    const getChampion = async (idChamp) => {
         try{
-            const response = await axios.get(`https://universe.leagueoflegends.com/fr_FR/story/champion/lulu/`)
+            const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion/${idChamp}.json`,
+                {
+                    headers: {
+                        //'Access-Control-Allow-Origin': '*',
+                    },
+                })
+
             const data = await response.data
-            // console.log(data)
-            const $ = cheerio.load(data)
-            const story = $('meta[property="og:description"]').attr('content')
+            const champion = data.firstElementChild
+            console.log("Data Champion : ",champion)
 
             setChampion((prevChampion) => ({
                 ...prevChampion,
-                fullLore: story,
+                champion
             }));
+
+        }catch (error){
+            console.error('Error : ',error)
+        }
+    }
+    const getChampionStory = async () => {
+        try{
+            const jsonStoryLink = `${process.env.REACT_APP_RIOT_STORIES_JSON}${champion.id}${process.env.REACT_APP_RIOT_STORIES_JSON_END}`;
+            console.log(jsonStoryLink)
+            const response = await fetch(jsonStoryLink)
+            const data = await response.json()
+            console.log(data)
+
+
+
+            // setChampion((prevChampion) => ({
+            //     ...prevChampion,
+            //     fullLore: story,
+            // }));
         }catch (error){
             console.error('Error : ',error)
         }
     }
 
-    //Récupérer la citation principale du personnage sur le site https://leagueoflegends.fandom.com/
-    const getMainQuote = async () => {
-        const response = await axios.get(`https://leagueoflegends.fandom.com/fr/wiki/Lulu/Historique`)
-        const data = await response.data
-        const $ = cheerio.load(data)
-        const mainQuote = $('.mw-parser-output i:first').text().trim()
-        console.log('Main Quote : ',mainQuote)
-    }
-    const getQuotes = async () => {
-        const response = await axios.get(`https://leagueoflegends.fandom.com/fr/wiki/Lulu/Historique`)
-        const data = await response.data
-        console.log('Quotes : ',data)
-    }
     function initChampion():Champion{
         console.log('Initialising champion')
         return{
-            id: 0,
+            id: '',
+            key: 0,
             name: '',
             title: '',
             region: '',
@@ -77,9 +78,8 @@ const ChampionItem = () => {
     }
 
     useEffect(() => {
+        getChampion(idChamp)
         getChampionStory()
-        getMainQuote()
-        getQuotes()
     }, []);
 
     useEffect(() => {
@@ -100,14 +100,6 @@ const ChampionItem = () => {
                     <p>{champion?.shortLore}</p>
                 </>
                 ) : 'Loading...'}
-            {(
-                <audio controls>
-                    <source
-                        src="https://static.wikia.nocookie.net/leagueoflegends/images/c/c5/Lulu.mouvement03.ogg/revision/latest?path-prefix=fr"
-                        type="application/ogg"/>
-                    Votre navigateur ne prend pas en charge l'élément audio.
-                </audio>
-            )}
         </div>
     )
 }

@@ -10,7 +10,7 @@ const Champions = () => {
     return (
         <>
         <h1>Champions</h1>
-            <ChampionItem />
+            <ChampionItem idChamp="lulu"/>
         </>
     )
 }

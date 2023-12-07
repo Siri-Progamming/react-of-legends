@@ -1,5 +1,6 @@
 interface Champion {
-    id?: number | 0;
+    id?: string | '';
+    key?: number | 0;
     name?: string | '';
     title?: string | '';
     region?: string | '';

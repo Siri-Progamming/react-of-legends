@@ -1,0 +1,742 @@
+// https://universe-meeps.leagueoflegends.com/v1/fr_fr/champions/lulu/index.json
+// https://universe.leagueoflegends.com/fr_FR/champion/lulu/
+{
+  "id": "lulu",
+  "name": "Lulu",
+  "title": "Sorcière féérique",
+  "locale": "fr_fr",
+  "champion": {
+    "type": "champion",
+    "release-date": "2012-03-20T00:00:00.000Z",
+    "name": "Lulu",
+    "title": "Sorcière féérique",
+    "section-title": "Lulu",
+    "slug": "lulu",
+    "associated-faction": "",
+    "associated-faction-slug": "bandle-city",
+    "image": {
+      "title": "lulu-splash",
+      "subtitle": "",
+      "description": "",
+      "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt71009d4f4fabcf6f/60ee0f3fb898ee4eaeb6e6a7/Lulu_0.jpg",
+      "encoding": "image/jpeg",
+      "width": 1215,
+      "height": 717,
+      "x": 956,
+      "y": 173,
+      "featured-champions": []
+    },
+    "background": {
+      "title": "lulu-splash",
+      "subtitle": "",
+      "description": "",
+      "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt71009d4f4fabcf6f/60ee0f3fb898ee4eaeb6e6a7/Lulu_0.jpg",
+      "encoding": "image/jpeg",
+      "width": 1215,
+      "height": 717,
+      "x": 956,
+      "y": 173,
+      "featured-champions": []
+    },
+    "url": "/fr_fr/champion/lulu",
+    "video": null,
+    "races": [],
+    "roles": [
+      {
+        "name": "Support",
+        "slug": "support"
+      },
+      {
+        "name": "Mage",
+        "slug": "mage"
+      }
+    ],
+    "role": [
+      {
+        "name": "Support",
+        "slug": "support"
+      },
+      {
+        "name": "Mage",
+        "slug": "mage"
+      }
+    ],
+    "game-info-url": "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/lulu",
+    "biography": {
+      "full": "
+      Lulu a toujours été une yordle attentionnée et empathique, bien qu'elle ait autant la tête dans les nuages que les pieds sur terre. Un beau jour, alors qu'elle se promenait dans le monde matériel, elle rencontra ce qui lui sembla être un oiseau blessé. Elle courut l'aider, mais l'oiseau se changea en un minuscule esprit féérique. Avant que Lulu n'ait pu réagir, la créature s'était saisi de sa canne et s'était enfuie, poursuivie par la yordle qui ne cessait de rire.
+
+      L'esprit l'entraîna au cœur de la forêt. Ils passèrent par-dessus des rochers, par-dessous des troncs et à côté de cercles de pierres antiques. L'esprit féérique fonça dans une grotte que dissimulait une chute d'eau, et Lulu s'y engouffra à sa suite. Il voletait toujours hors de sa portée.
+
+      Ils descendirent encore et encore, toujours plus profondément. Lulu crapahutait dans les racines tordues et les champignons brillants, et elle finit par passer dans le monde spirituel sans même s'en rendre compte. Tout autour d'elle, l'environnement était de plus en plus étrange et déroutant ; le haut se retrouva en bas, l'avant échangea sa place avec l'arrière, ce qui était grand devint petit.
+
+      Après ce qui parut être une éternité, Lulu rattrapa l'esprit féérique ; il s'appelait Pix, apprit-elle plus tard.
+
+      D'un claquement de ses petits doigts, Pix transforma la modeste canne en un bâton spiralé et rendit l'objet à la yordle. Lulu poussa des cris de surprise en découvrant que son bâton pouvait désormais faire pousser des feuilles et des fleurs. C'est ainsi que commença sa grande histoire d'amitié avec Pix : avec des farces, de l'aventure et un profond amour de la nature.
+
+      Pix l'avait conduite dans la Clairière.
+
+      Bandle, là où habitait Lulu, était un endroit bizarre et magique qui défiait toute logique, où le temps n'était qu'une vague notion et où les lois du monde matériel ne s'appliquaient pas complètement. Et pourtant, la Clairière était encore plus extraordinaire ; elle existait déjà bien avant l'apparition des yordles, et c'est peut-être même elle qui a donné naissance à Bandle. Baignant dans la magie primordiale à l'état brut, cet endroit était si bien caché qu'aucun yordle ne l'avait jamais vu... jusqu'à ce jour.
+
+      Là, les pouvoirs magiques de Lulu s'amplifièrent follement. Au comble du bonheur, elle découvrit qu'elle pouvait remodeler son environnement à volonté, mais aussi altérer sa propre forme. Elle donna alors vie à tout ce que son imagination débordante pouvait concevoir.
+
+      Lulu ne savait pas si Pix l'avait amenée ici parce qu'il avait décelé de la bonté en elle et parce qu'il voulait un compagnon de jeu, ou si c'était la Clairière qui l'avait convoquée pour une raison ou une autre ; dans tous les cas, elle tomba instantanément sous le charme de l'endroit. Sa vie n'était plus qu'une suite infinie de créations et de jeux, et elle oublia bien vite tout le reste de son existence.
+
+      Lorsque ses souvenirs ressurgirent, Lulu eut l'impression de se réveiller après avoir fait un long rêve.
+
+      Elle retourna dans le monde matériel, ignorant combien de temps avait pu s'écouler. Un jour ? Des milliers d'années ? À sa grande surprise, elle constata qu'elle avait conservé une partie de ses nouveaux pouvoirs ; elle pouvait toujours agrandir ou rapetisser des choses, changer les couleurs qui ne lui plaisaient pas et endormir toutes sortes de créatures. Pix aussi fut ravi de la voir transformer les bêtes les plus féroces en petits écureuils désemparés d'un simple geste de son bâton.
+
+      Néanmoins, Lulu commença à se languir de la Clairière. Elle voulut s'y rendre à nouveau, mais elle se rendit compte qu'elle ne savait plus par où il fallait passer. Pix lui dit qu'il ne savait plus non plus comment y accéder, mais peut-être ne voulait-il seulement pas y retourner tout de suite.
+
+      Imperturbable, Lulu se mit tout de même en route. Elle était sûre que la route qui conduisait à la Clairière changeait continuellement, de toute façon. Chaque fois qu'elle devait choisir une direction, elle laissait faire le hasard, et elle allait même au-devant de terribles dangers quand cela lui paraissait amusant. Son voyage l'emmena aux quatre coins du monde, et la magie, le chaos et les accidents n'étaient jamais loin derrière elle.
+
+      À Demacia, elle libéra un groupe d'enfants de leur cours d'histoire assommant et les conduisit dans un pré voisin. Pour s'amuser, elle les changea en amanites pendant tout un cycle lunaire ; les parents, désespérés, aidèrent la milice locale à les rechercher, mais en vain. Ce n'était pas tout à fait ce qu'avait prévu Lulu, mais elle avait beaucoup ri. Quand les enfants rentrèrent chez eux et racontèrent ce qui leur était arrivé, personne ne les crut.
+
+      Dans les régions frontalières de Freljord, Lulu trouva hilarant de transformer en fleurs les armes de deux tribus rivales qui s'affrontaient, ce qui plongea inévitablement les guerriers dans la confusion la plus totale. Plus récemment, elle est allée se perdre à Ionia, où elle s'est amusée parmi les éternias brillants de Qaelin, après avoir joué quelques tours à des acolytes de l'Ordre de l'ombre. Elle les trouve bien trop sérieux.
+
+      Bien que Lulu cherche à retourner dans la Clairière sans jamais y parvenir, elle garde le sourire, car chaque jour est pour elle une nouvelle aventure amusante.
+
+      D'ailleurs, elle a fini par réaliser qu'une partie de la Clairière sera toujours dans son cœur, où qu'elle aille.
+
+      ",
+      "short": "Magicienne yordle, Lulu aime conjurer des illusions oniriques et de drôles de créatures en explorant Runeterra avec Pix, sa fée de compagnie. Lulu forge la réalité selon ses désirs, modifiant à sa guise la structure du monde et ce qu'elle considère comme les contraintes physiques d'un univers sans saveur. Beaucoup pensent que sa magie n'est pas naturelle, pour ne pas dire dangereuse, mais elle estime qu'un peu d'enchantement ne peut faire de mal à personne.",
+      "quote": "« Le plus rapide pour aller d'un point à un autre consiste à y aller à l'envers, entre les deux puis en dehors et enfin tout autour. »",
+      "quote-author": "Lulu"
+    },
+    "headerImage": null
+  },
+  "related-champions": [
+    {
+      "type": "champion",
+      "release-date": "2009-07-24T00:00:00.000Z",
+      "name": "Veigar",
+      "title": "Seigneur des maléfices",
+      "section-title": "Veigar",
+      "slug": "veigar",
+      "associated-faction": "",
+      "associated-faction-slug": "bandle-city",
+      "image": {
+        "title": "veigar-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt2660186c36e21d58/60ee137d09c9f73c0e83f8a0/Veigar_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 865,
+        "y": 71,
+        "featured-champions": []
+      },
+      "background": {
+        "title": "veigar-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt2660186c36e21d58/60ee137d09c9f73c0e83f8a0/Veigar_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 865,
+        "y": 71,
+        "featured-champions": []
+      },
+      "url": "/fr_fr/champion/veigar",
+      "video": null,
+      "races": [],
+      "roles": [
+        {
+          "name": "Mage",
+          "slug": "mage"
+        }
+      ],
+      "role": [
+        {
+          "name": "Mage",
+          "slug": "mage"
+        }
+      ],
+      "game-info-url": "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/veigar",
+      "biography": {
+        "full": "
+        Pour la plupart des peuples de Runeterra, les yordles ne sont généralement pas des créatures à craindre. On dit de leur fabuleuse ville de Bandle que c'est un mystérieux lieu spirituel, rempli de vieilles reliques et d'objets de toutes sortes trouvés un peu partout dans le monde matériel. Ces curieuses créatures vivent volontiers quelque temps parmi les races mortelles, mais c'est pour retourner chez elles avec des expériences et des histoires nouvelles.
+
+        Pourtant, certains yordles s'égarent. Ce fut le cas du sorcier Veigar.
+
+        Il y a des siècles de cela, la Grande guerre des Darkin ne laissa dans le monde que des ruines. La seule lumière pour Valoran lui vint des cieux. Les survivants se tournèrent vers les nuées, et les études qu'ils entreprirent sur l'ancienne magie céleste piquèrent la curiosité de Veigar. Se voyant déjà maître des arts mystiques, le yordle se joignit à un ordre de mages des terres noxiis, cherchant à en apprendre plus sur leurs arcanes. Personne ne remit en cause cet ardent débutant et c'est lui qui leur apprit à puiser l'espoir dans les schémas dessinés par le mouvement des étoiles.
+
+        Mais là où certains voulaient rebâtir le monde, d'autres ne cherchaient qu'à le conquérir. Le brutal Mordekaiser, à la tête de ses armées, ravagea une terre après l'autre, détruisant et réduisant en esclavage ceux qui s'opposaient à son règne. Les mages de l'ordre furent massacrés aussi, car ils n'étaient pas formés à la guerre et ne lui étaient d'aucune utilité. Le chef de guerre, en passant en revue ses prisonniers, aperçut Veigar et comprit sa vraie nature. Il le souleva dans son gantelet d'acier et l'emmena avec lui pendant que les autres mages étaient passés au fil de l'épée.
+
+        Emprisonné au cœur de la nouvelle forteresse de Mordekaiser, Veigar fut obligé de mettre sa magie au service de sombres desseins. Sachant que les yordles étaient de plus habiles artisans qu'aucune race mortelle, Mordekaiser lia Veigar au plan physique, l'empêchant même de fuir vers Bandle. Il n'était pas le seul captif de ce lieu infernal, mais un tel isolement était pour un yordle la forme la plus cruelle de torture. Veigar accomplit de sinistres enchantements contre sa volonté, renforçant la domination de son maître ou diffusant une terreur sans autre but qu'elle-même.
+
+        Oui, la terreur était bien ce qui alimentait cet effroyable empire. Désespéré, Veigar devint le témoin réticent de la montée de Mordekaiser vers une quasi-immortalité. Cela prit des décennies, ou des siècles (Veigar ne le sut jamais), mais l'apparence et la magie du yordle commencèrent à s'altérer…
+
+        Les souvenirs du passé disparurent. Pourquoi était-il venu à Valoran ? D'où venait-il ? Avait-il connu une autre vie avant celle-ci ? Ces questions et bien d'autres pesaient sur son esprit fragile, comme les dernières lueurs avant une éclipse.
+
+        Quand les propres serviteurs du maître de guerre conspirèrent contre lui et mirent fin à son règne de cauchemar, Veigar était devenu méconnaissable. Ses yeux étaient enflammés. Même sa voix trahissait quelque chose de maléfique. La créature qui s'échappa de sa cage ensorcelée ne s'intéressa pas à la guerre de succession qui suivit inéluctablement. Au plus profond, il aspirait probablement à la sécurité et à la liberté que veulent toutes les créatures vivantes.
+
+        Mais, loin de se détourner du mal, il choisit de s'y adonner. Sanglé dans une armure digne d'un sorcier des ténèbres, il jura de gagner le respect de la seule manière dont il se souvenait : par la peur. Il attirerait la fureur des étoiles elles-mêmes sur ses ennemis, et il enfermerait ces derniers dans les moments infiniment immobiles qui séparent le flux du temps.
+
+        Pourtant… Veigar n'eut pas le même succès que son ancien maître.
+
+        Les bonnes gens de Valoran apprirent bien à le craindre, jusqu'à un certain point. Trop souvent, ils retrouvaient leurs champs incendiés ou le manoir du baron local rasé jusqu'aux fondations. Quelquefois, pourtant, inexplicablement, des bandes de brigands étaient chassées de leurs repaires dans les bois, ou on ne retrouvait d'une meute de loups affamés que des cadavres, et il était difficile de dire si ces actions étaient maléfiques ou plutôt utiles. Veigar avait des difficultés à vivre à la hauteur de ses aspirations de Maître du Mal.
+
+        Pourtant, le néfaste yordle n'a toujours pas abandonné sa quête pour devenir le pire méchant de la planète. Son bâton diabolique en main, il cherche à mettre tout le monde à genoux devant lui et il se réjouit de la chute de tous ceux qui osent le sous-estimer.
+
+        ",
+        "short": "
+        Enthousiaste sorcier yordle, Veigar s'est livré à des pouvoirs que peu d'autres osent approcher. Citoyen de Bandle à l'esprit libre, il voulait en apprendre plus sur la magie céleste pratiquée par les mortels, mais sa curiosité naturelle fut dévoyée par son emprisonnement dans le Bastion immortel. Créature têtue désormais en possession de la fureur noire des étoiles, Veigar est souvent sous-estimé. Bien qu'il se considère lui-même comme profondément maléfique, certains s'interrogent sur ses motivations les plus profondes…
+
+        ",
+        "quote": "Vous niez la noirceur de votre âme...",
+        "quote-author": "Veigar"
+      },
+      "headerImage": null
+    },
+    {
+      "type": "champion",
+      "release-date": "2014-08-14T00:00:00.000Z",
+      "name": "Gnar",
+      "title": "Chaînon manquant",
+      "section-title": "Gnar",
+      "slug": "gnar",
+      "associated-faction": "",
+      "associated-faction-slug": "freljord",
+      "image": {
+        "title": "gnar-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt257549813773c72c/60ee0dcd2f7fa122fd5749ad/Gnar_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 1036,
+        "y": 485,
+        "featured-champions": []
+      },
+      "background": {
+        "title": "gnar-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt257549813773c72c/60ee0dcd2f7fa122fd5749ad/Gnar_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 1036,
+        "y": 485,
+        "featured-champions": []
+      },
+      "url": "/fr_fr/champion/gnar",
+      "video": {
+        "title": "gnar-splashvideo-webm",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://assets.contentstack.io/v3/assets/blt187521ff0727be24/bltc3157ad5ca2940ea/60ee0dcefae20a5b4faf0abd/gnar-splashvideo.webm",
+        "encoding": "video/webm",
+        "width": 1280,
+        "height": 720,
+        "x": 1036,
+        "y": 485,
+        "featured-champions": []
+      },
+      "races": [],
+      "roles": [
+        {
+          "name": "Combattant",
+          "slug": "fighter"
+        },
+        {
+          "name": "Tank",
+          "slug": "tank"
+        }
+      ],
+      "role": [
+        {
+          "name": "Combattant",
+          "slug": "fighter"
+        },
+        {
+          "name": "Tank",
+          "slug": "tank"
+        }
+      ],
+      "game-info-url": "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/gnar",
+      "biography": {
+        "full": "
+        Avant que la glace ne donne son nom à Freljord, il y avait un pays uniquement composé de merveilles… à condition de le voir avec les yeux de Gnar.
+
+        Jeune yordle doté d'une énergie sans limite, Gnar vivait librement parmi les tribus du nord avec ses semblables. Bien qu'il fût à peine assez lourd pour laisser ses empreintes sur la neige, son tempérament rivalisait avec celui de bêtes dix fois plus grosses et il explosait en jurons dès que quelque chose allait de travers. En conséquence, il se sentait plus proche des grandes créatures qui, avec sagesse, vivaient éloignées des mortels. Pour Gnar, c'étaient de grands yordles à fourrure blanche… et il ne lui en fallait pas plus.
+
+        Tandis que les tribus cherchaient leur nourriture dans la toundra, cueillant baies sauvages et mousses nutritives, Gnar recherchait des choses plus essentielles comme des cailloux, des galets et les restes boueux des oiseaux morts. Son plus grand trésor était la mâchoire d'un drüvask. Quand il l'exhuma de la terre froide, il glapit de joie et l'envoya aussi loin qu'il le pouvait.
+
+        Elle retomba deux bonds plus loin.
+
+        Emballé par ce succès immédiat, Gnar ne lâcha plus son « boomerang ». Le monde faisait de son mieux pour lui offrir sans cesse de nouveaux délices (des babioles scintillantes, de doux parfums, des objets tout ronds…), mais rien ne valait le plaisir pour lui de lancer et de rattraper son arme préférée. Il se considérait désormais comme un chasseur, et il suivait la trace de troupeaux sauvages qui ne lui accordaient aucune attention.
+
+        Mais même lui fut capable de sentir qu'un bouleversement approchait. Le ciel se faisait plus sombre. Les vents étaient plus froids. Les tribus mortelles qui naguère chassaient et cueillaient de concert semblaient désormais se battre…
+
+        Gnar se dit que les grands yordles blancs sauraient quoi faire. Il alla les voir.
+
+        Utilisant tous ses talents de chasseur, il les retrouva dans les pics enneigés d'une vaste chaîne de montagnes, beaucoup plus loin qu'il n'était jamais allé. Alors qu'il approchait sans être vu, il constata que d'innombrables mortels se trouvaient également là. C'était un spectacle fascinant, mais personne ne semblait particulièrement réjoui.
+
+        Soudain, le sol trembla et s'ouvrit. Pour la première fois dans la vie de Gnar, tout le monde sembla pris de frénésie. Les mortels hurlèrent. Les gros yordles rugirent.
+
+        Mais l'arrivée du monstre les réduisit tous au silence.
+
+        S'extirpant de l'abîme qui venait de s'ouvrir, il avait de grosses cornes, des tentacules et un œil unique qui brûlait d'une étrange et terrifiante lumière. Alors que certains mortels fuyaient à cette vue, Gnar ressentit une étrange douleur dans sa poitrine : comme s'il avait perdu son boomerang ou qu'on le menaçait de ne plus jamais avoir de câlin. Cette chose horrible voulait faire du mal à ses nouveaux amis.
+
+        Et cela le mit en colère. À cet instant, Gnar était vraiment furieux.
+
+        Il ne voyait plus qu'une chose : le monstre. En un éclair, il bondit dans les airs dans sa direction. Dans une patte, il saisit une boule de neige… Du moins, c'est ce qu'il croyait. En fait, il s'agissait d'un gros rocher arraché au flanc de la montagne. Gnar, en effet, était devenu aussi gros que les grands yordles blancs. Il avait l'intention de renvoyer ce monstre là d'où il venait en lui écrasant le visage !
+
+        Son coup, cependant, n'atteignit jamais sa cible. Gnar sentit un vent plus froid que n'importe quel hiver, au point de transformer l'air lui-même en glace. C'était une magie élémentaire qui le congela sur place, perçant jusqu'à sa fourrure sauvage. Tout, y compris le monstre, devint silencieux. La force et la colère du yordle s'évanouirent. Une grande fatigue s'empara de ses membres et il s'endormit.
+
+        Le sommeil de Gnar dura très longtemps. Quand il s'éveilla enfin, il secoua le givre de ses épaules en respirant lourdement. Il n'y avait plus personne. N'ayant plus de monstre à combattre et plus d'amis à protéger, il se sentait tout petit et de nouveau seul.
+
+        La terre avait beaucoup changé, aussi. Il y avait de la neige partout, comme un manteau blanc recouvrant tout à perte de vue. Mais Gnar poussa un petit cri de plaisir en voyant que son boomerang bien-aimé était toujours là, et il se mit à la recherche de quelque chose à chasser.
+
+        Aujourd'hui encore, Gnar n'a pas la moindre idée de ce qui s'est passé en ce jour détestable et ignore comment il s'en est tiré. Il s'émerveille toujours de ce que le monde a à lui offrir et a hâte de l'explorer.
+
+        ",
+        "short": "
+        Gnar est un yordle dont les manières joyeuses peuvent soudain faire place à une colère irrationnelle. Il se transforme alors en une bête colossale portée à la destruction. Gelé dans de la glace pure pendant des millénaires, la curieuse créature s'est libérée de sa prison. Aujourd'hui, Gnar parcourt avec enthousiasme un monde qu'il trouve exotique et merveilleux. Enchanté par le danger, Gnar lance à ses ennemis tout ce qu'il trouve, qu'il s'agisse de son boomerang en croc... ou d'un tronc déraciné.
+
+        ",
+        "quote": "« Gnar ! »",
+        "quote-author": "Gnar"
+      },
+      "headerImage": null
+    }
+  ],
+  "explore-champions": [
+    {
+      "type": "champion",
+      "release-date": "2010-10-19T00:00:00.000Z",
+      "name": "Lux",
+      "title": "Dame de lumière",
+      "section-title": "Lux",
+      "slug": "lux",
+      "associated-faction": "",
+      "associated-faction-slug": "demacia",
+      "image": {
+        "title": "lux-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt9f9df38e50f393d4/60ee0f4c5eda9722617c575e/Lux_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 784,
+        "y": 51,
+        "featured-champions": []
+      },
+      "background": {
+        "title": "lux-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt9f9df38e50f393d4/60ee0f4c5eda9722617c575e/Lux_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 784,
+        "y": 51,
+        "featured-champions": []
+      },
+      "url": "/fr_fr/champion/lux",
+      "video": null,
+      "races": [],
+      "roles": [
+        {
+          "name": "Mage",
+          "slug": "mage"
+        },
+        {
+          "name": "Support",
+          "slug": "support"
+        }
+      ],
+      "role": [
+        {
+          "name": "Mage",
+          "slug": "mage"
+        },
+        {
+          "name": "Support",
+          "slug": "support"
+        }
+      ],
+      "game-info-url": "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/lux",
+      "biography": {
+        "full": "
+        Luxanna préfère qu'on l'appelle Lux. Elle a grandi dans la ville demacienne de Haut-Lac-d'Argent, avec son frère aîné Garen. Ils naquirent tous deux dans la prestigieuse famille Crownguard, qui protégeait depuis des générations les rois de Demacia. Leur grand-père sauva le roi à la bataille du Croc de la Tempête, et leur tante Tianna fut nommée commandant d'un régiment d'élite, le Détachement hardi, avant la naissance de Lux.
+
+        Garen accepta la vocation de sa famille avec enthousiasme et s'engagea dans l'armée alors qu'il n'était qu'un gamin. Lux, en son absence, était censée aider sa famille à gérer ses domaines, tâche qui lui déplut dès la petite enfance. Elle voulait explorer le monde, voir ce qu'il y avait au-delà des murs et des frontières de Demacia. Elle admirait Garen, mais son désir de la voir renoncer à ses ambitions la faisait souffrir.
+
+        À la plus grande frustration des professeurs de Lux, qui voulaient la préparer à une vie de devoirs au service de la famille Crownguard, Lux questionnait tous leurs enseignements, examinait toutes les perspectives d'un problème et cherchait à s'instruire bien au-delà de ce qu'ils étaient capables de transmettre. Mais aucun ne parvenait à se fâcher vraiment contre la jeune fille, qui débordait de vie et d'optimisme communicatif.
+
+        Nul ne savait que des changements radicaux allaient survenir. Autrefois, la magie avait failli détruire Runeterra, et Demacia avait été fondée sur un lieu où ces pouvoirs étaient interdits. Les contes populaires du royaume étaient pleins de jeunes gens au cœur pur attirés vers le mal par l'appât de la magie. De fait, l'oncle de Lux et Garen avait été tué par un mage quelques années plus tôt.
+
+        Or, des rumeurs terrifiées provenant d'au-delà des grandes montagnes annonçaient le retour irrésistible de la magie…
+
+        En rentrant chez elle, une nuit, Lux fut attaquée par une meute enragée de loups à dents de sabre. Dans ce moment de peur et de désespoir, la jeune fille trouva au fond d'elle-même un torrent de lumière magique qui chassa les bêtes, mais la laissa pantelante de peur. La magie, la terreur des légendes de Demacia, faisait partie d'elle au même titre que son héritage Crownguard.
+
+        L'angoisse et le doute s'emparèrent d'elle. Allait-elle devenir un serviteur du mal, elle aussi ? Était-elle une abomination, vouée à l'exil ou à l'emprisonnement ? Sans compter que, si ses pouvoirs étaient découverts, le nom des Crownguard serait déshonoré à jamais.
+
+        Garen passant le plus clair de son temps loin du foyer, Lux se retrouva seule dans le domaine familial. Pourtant, au fil du temps, elle se familiarisa avec sa magie et ses nuits d'insomnies et de lutte intérieure contre ses pouvoirs se firent de plus en plus rares. Elle commença à s'entraîner en secret, jouant avec des rayons de lumière dans les courettes, leur donnant une forme solide et créant même de petites silhouettes scintillantes dans sa paume. Elle prit la décision de n'en parler à personne.
+
+        Quand elle eut seize ans, Lux voyagea avec ses parents Pieter et Augatha jusqu'à leur résidence d'apparat dans la Grande cité de Demacia, afin d'assister à l'investiture de Garen au sein du prestigieux Détachement hardi.
+
+        La ville éblouit Lux. C'était un monument élevé aux nobles idéaux du royaume. Chaque citoyen y était protégé, on s'y occupait de tous. Lux apprit l'existence des Illuminateurs, un ordre religieux charitable dédié aux malades et aux pauvres. Entre deux mondanités de cour avec sa famille, elle devint l'amie d'un chevalier de l'ordre, Kahina, qui lui apprit de nombreuses compétences martiales. Toutes deux s'entraînaient ensemble dans les jardins du manoir Crownguard.
+
+        Passant du temps dans la capitale, Lux a enfin commencé à en apprendre plus sur le monde, sa diversité et son histoire. Désormais, elle comprend que l'art de vivre de Demacia n'est pas le seul possible, et son amour pour son pays ne l'empêche plus de vouloir qu'il évolue vers plus de justice et, peut-être, une meilleure acceptation des mages comme elle.
+
+        ",
+        "short": "Luxanna Crownguard est originaire de Demacia, un royaume isolationniste où la magie inspire la peur et la méfiance. Capable de plier la lumière à sa volonté, elle a grandi dans la crainte d'être un jour exilée et a été contrainte de dissimuler son pouvoir pour préserver l'honneur de sa famille. Pourtant, l'optimisme et la résistance de Lux l'ont conduite à accepter ses talents exceptionnels, et elle cherche à répandre dans le royaume une plus grande compréhension et une plus grande tolérance.",
+        "quote": "« C'est la lumière qui est en moi qui me rend différente, et je ne la fais voir qu'avec précaution. »",
+        "quote-author": "Lux"
+      },
+      "headerImage": null
+    },
+    {
+      "type": "champion",
+      "release-date": "2009-09-02T00:00:00.000Z",
+      "name": "Malphite",
+      "title": "Éclat du monolithe",
+      "section-title": "Malphite",
+      "slug": "malphite",
+      "associated-faction": "",
+      "associated-faction-slug": "ixtal",
+      "image": {
+        "title": "malphite-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt78c8355477d986b9/60ee0f4f5397524ead389121/Malphite_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 933,
+        "y": 403,
+        "featured-champions": []
+      },
+      "background": {
+        "title": "malphite-splash",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt78c8355477d986b9/60ee0f4f5397524ead389121/Malphite_0.jpg",
+        "encoding": "image/jpeg",
+        "width": 1215,
+        "height": 717,
+        "x": 933,
+        "y": 403,
+        "featured-champions": []
+      },
+      "url": "/fr_fr/champion/malphite",
+      "video": null,
+      "races": [],
+      "roles": [
+        {
+          "name": "Tank",
+          "slug": "tank"
+        },
+        {
+          "name": "Combattant",
+          "slug": "fighter"
+        }
+      ],
+      "role": [
+        {
+          "name": "Tank",
+          "slug": "tank"
+        },
+        {
+          "name": "Combattant",
+          "slug": "fighter"
+        }
+      ],
+      "game-info-url": "http://gameinfo.euw.leagueoflegends.com/fr/game-info/champions/malphite",
+      "biography": {
+        "full": "
+        Pendant plus de deux millénaires, Shurima domina le monde connu ; son empire régnait de façon incontestée sur d'innombrables peuples, rien ne pouvait le menacer.
+
+        Jusqu'au jour de la chute d'Icathia.
+
+        Dès l'instant où le Néant se fraya un chemin dans le monde physique, les armées de Shurima se retrouvèrent face à un ennemi qui non seulement était capable de raser leur empire, mais qui semblait aussi gagner en puissance chaque fois qu'on s'opposait à lui. La corruption se répandit rapidement depuis les ruines d'Icathia, se déversant sur les terres et sous les océans, jusqu'à atteindre les jungles les plus au sud d'Ixtal.
+
+        Ne'Zuk, de l'Ost des Transfigurés, était un mage élémentaire ixtali à la puissance colossale et à l'arrogance sans égale. Il promit à l'empereur de créer une arme suffisamment destructrice pour éradiquer le Néant à la source de son éruption.
+
+        Après des mois de labeur inhumain, Ne'Zuk dévoila le Monolithe : une forteresse flottante faite de pierre vivante, maintenue dans les airs par l'élite des mages élémentaires et sur les remparts de laquelle se dressaient des dieux-guerriers ixtali. Aussi vaste que la cité elle-même, le Monolithe plana majestueusement en direction des terres dévastées d'Icathia ; les éclairs qui jaillissaient de ses inhibiteurs magiques transformaient le sable en verre. Ne'Zuk et sa super-arme arrivèrent à destination, devant les infinies ténèbres hurlantes du royaume des abysses et leurs hordes de Néantins.
+
+        La bataille dura des semaines et fut d'une violence sans précédent dans l'histoire de Runeterra. Des sorts capables d'annihiler des civilisations entières, voire de réduire en poussière des continents, furent lancés contre le Néant.
+
+        Les ténèbres répliquèrent de la même manière. Leur terrifiante énergie tailla profondément dans la pierre vivante du Monolithe, dont la surface devint grêlée de malphites, un terme ixtali signifiant « mauvaise pierre », et autres cicatrices contre nature. La forteresse fut poussée dans ses derniers retranchements, luttant pour restaurer sa superstructure affaiblie… mais même la magie qui la maintenait dans les airs, aussi formidable fût-elle, avait son point de rupture.
+
+        Tandis que Ne'Zuk tâchait de rallier ses camarades transfigurés pour un dernier assaut désespéré, l'impensable se produisit. Le Monolithe s'écrasa avec fracas sur la terre, perçant le soubassement d'Icathia et dévoilant le Néant sous-jacent.
+
+        La majeure partie de la forteresse fut engloutie dans cette gueule béante et disparut dans le vide silencieux qui attendait au-delà. Les derniers vestiges du Monolithe formèrent d'immenses ruines en retombant, parsemant un paysage déjà noirci par le conflit qui venait d'être si abruptement interrompu. Ne'Zuk, seul survivant parmi les Transfigurés, s'extirpa des décombres de ce qui aurait dû être sa plus grande réussite et prit la fuite, la bouche encore pleine des cendres de son échec.
+
+        Pour une raison défiant la logique du monde matériel, des fragments du Monolithe survécurent, toujours investis d'une espèce de vie magique. Ces éclats luttèrent pour guérir, pour reformer le tout auquel ils avaient appartenu. Mais l'insatiable faim du Néant absorba leur énergie vitale, les réduisant à l'état de simples cailloux inertes qui se débattaient pathétiquement dans la poussière.
+
+        Et pourtant, malgré tout ce qui avait été perdu, un éclat perdura.
+
+        Enfoncé profondément sous la surface, oublié même de ceux qui vivaient dans l'abîme, il reprit lentement des forces. L'éclat resta en sommeil pendant des siècles ; quand il se réveilla, il constata qu'il était seul.
+
+        Depuis ce jour funeste, Malphite, le dernier éclat du Monolithe, est devenu une légende à Runeterra. Il a été aperçu aux quatre coins du monde, de Targon à Zaun, et entendu dans les grottes les plus profondes, parfois sous la forme d'un grondement sourd, mais aussi sous celle d'un léger fredonnement, comme s'il se rappelait des sons d'un monde qu'il a jadis connu.
+
+        Malgré sa longue existence, l'étincelle de vie allumée par Ne'Zuk lors de la création du Monolithe n'a pas faibli. À présent, Malphite sait qu'il va bientôt devoir se dresser contre les ténèbres qu'il a combattues il y a des siècles de cela, car le Néant se réveille à son tour et menace une nouvelle fois Runeterra.
+
+        ",
+        "short": "Massive créature de pierre vivante, Malphite est issu du cœur de la grande structure ixtali connue sous le nom de Monolithe. Il a étudié l'équilibre élémentaire de Runeterra pendant des siècles, utilisant sa force phénoménale pour maintenir l'ordre dans un monde fréquemment en proie au chaos et écraser les horreurs qui rampent sous la surface. Aujourd'hui, Malphite doit endurer le caractère volatil des mortels qui n'ont cessé de troubler son sommeil, tout en défendant la seule cause digne du dernier de son espèce.",
+        "quote": "« Attention, serviteurs du chaos ! L'éclat du Monolithe est parmi nous ! »",
+        "quote-author": "Malphite"
+      },
+      "headerImage": null
+    }
+  ],
+  "modules": [
+    {
+      "slug": "lulu-artspotlight",
+      "type": "featured-video",
+      "section-title": "",
+      "featured-image": {
+        "title": "featuredvideocover-lulu-artspotlight",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt0d7e0cafe745b50b/60ee0d358a77034ffea232fa/lulu-artspotlight.png",
+        "encoding": "image/jpeg",
+        "width": 1910,
+        "height": 1072,
+        "x": 1205,
+        "y": 625,
+        "featured-champions": []
+      },
+      "title": "focus sur l'illustration de Lulu",
+      "subtitle": "",
+      "description": "Découvrez ce rendu à haute vitesse du travail artistique de Kienan, qui nous montre à quel point Lulu peut être imprévisible !",
+      "uri": "https://www.youtube.com/watch?v=H3F5zlJL5GA",
+      "video": {
+        "type": "video",
+        "title": "",
+        "subtitle": "",
+        "description": [],
+        "uri": "https://www.youtube.com/watch?v=H3F5zlJL5GA",
+        "width": "",
+        "height": "",
+        "x": "",
+        "y": "",
+        "featured-champions": []
+      },
+      "blackout": null,
+      "release-date": "2012-03-14T15:00:00.000Z",
+      "video-type": "art-spotlight",
+      "featured-champions": [
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        }
+      ],
+      "related-champions": [
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        }
+      ]
+    },
+    {
+      "slug": "Le Bidule qui murmure",
+      "type": "story-preview",
+      "title": "Le Bidule qui murmure",
+      "subtitle": "Par Graham McNeill",
+      "description": "Laissez-moi vous parler de ma clairière.
+
+      ",
+      "story-slug": "the-whispering-doodad",
+      "featured-image": {
+        "title": "doodad",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt22efa4152391c194/60ee0cb46610ed4d42bc21be/whispering_doodad.jpg",
+        "encoding": "image/jpeg",
+        "width": 0,
+        "height": 0,
+        "x": 0,
+        "y": 0,
+        "featured-champions": []
+      },
+      "background": {
+        "title": "doodad",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt22efa4152391c194/60ee0cb46610ed4d42bc21be/whispering_doodad.jpg",
+        "encoding": "image/jpeg",
+        "width": 0,
+        "height": 0,
+        "x": 0,
+        "y": 0,
+        "featured-champions": []
+      },
+      "release-date": "2019-05-14T15:00:00.000Z",
+      "featured-champions": [
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        },
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        }
+      ],
+      "minutes-to-read": 5,
+      "url": "/fr_fr/story/the-whispering-doodad"
+    },
+    {
+      "slug": "lulu-image-gallery",
+      "type": "image-gallery",
+      "section-title": "",
+      "isFanArt": false,
+      "fan-art-url": "",
+      "featured-image": "",
+      "title": "",
+      "subtitle": "",
+      "assets": [
+        {
+          "title": "Exploration conceptuelle de Lulu",
+          "subtitle": "",
+          "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt7921f5f32a7f02ee/60ee0f3d4cab5d36c003335e/lulu_concept_exploration.jpg",
+          "encoding": "image/jpeg",
+          "width": 1217,
+          "height": 1080,
+          "x": 629,
+          "y": 6,
+          "featured-champions": []
+        },
+        {
+          "title": "Étude du costume de Lulu",
+          "subtitle": "",
+          "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt0236e75318528cdb/60ee0f3b47e9392c53820593/lulu_concept.jpg",
+          "encoding": "image/jpeg",
+          "width": 1217,
+          "height": 1080,
+          "x": 629,
+          "y": 6,
+          "featured-champions": []
+        },
+        {
+          "title": "Étude de l'arme de Lulu",
+          "subtitle": "",
+          "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/bltad8cfcbb4bcfc324/60ee0f40e29e9e21c2a09734/lulu_staff.jpg",
+          "encoding": "image/jpeg",
+          "width": 1920,
+          "height": 955,
+          "x": 650,
+          "y": 252,
+          "featured-champions": []
+        }
+      ],
+      "featured-champions": [
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        }
+      ]
+    },
+    {
+      "slug": "lulu-shaco-song",
+      "type": "featured-video",
+      "section-title": "Les musiques de League of Legends",
+      "featured-image": {
+        "title": "featuredvideocover-lulu-shaco-song",
+        "subtitle": "",
+        "description": "",
+        "uri": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt05b30a0926eb992c/60ee0d37810a0e49eabfd020/lulu-shaco-song.jpg",
+        "encoding": "image/jpeg",
+        "width": 1920,
+        "height": 1080,
+        "x": 960,
+        "y": 495,
+        "featured-champions": []
+      },
+      "title": "Lulu and Shaco’s Quirky Encounter",
+      "subtitle": "",
+      "description": "",
+      "uri": "https://www.youtube.com/watch?v=PmnLRSHJSg8",
+      "video": {
+        "type": "video",
+        "title": "",
+        "subtitle": "",
+        "description": [],
+        "uri": "https://www.youtube.com/watch?v=PmnLRSHJSg8",
+        "width": "",
+        "height": "",
+        "x": "",
+        "y": "",
+        "featured-champions": []
+      },
+      "blackout": null,
+      "release-date": "2015-01-27T16:00:00.000Z",
+      "video-type": "song-visualization",
+      "featured-champions": [
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        },
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        }
+      ],
+      "related-champions": [
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        },
+        {
+          "type": "champion",
+          "release-date": null,
+          "associated-faction": "",
+          "associated-faction-slug": "unaffiliated",
+          "video": null,
+          "biography": {},
+          "headerImage": null
+        }
+      ]
+    }
+  ]
+}
