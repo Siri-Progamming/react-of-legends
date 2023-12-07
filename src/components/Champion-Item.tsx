@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react"
 import TextToSpeech from "./TextToSpeech"
 import Champion from "../interfaces/Champion.ts"
 import axios from "axios";
+import '../index.css'
+import {useParams} from "react-router-dom";
 
 interface ChampionItemProps{
     idChamp:string
@@ -13,7 +15,8 @@ interface RelatedChamp{
     name:string
 }
 
-const ChampionItem: React.FC<ChampionItemProps> = ({idChamp}) => {
+const ChampionItem: React.FC = () => {
+    const idChamp = useParams()
     const [champion, setChampion] = useState<Champion>(initChampion());
     const [championLoading, setChampionLoading] = useState<boolean>(false);
 
@@ -130,7 +133,7 @@ const ChampionItem: React.FC<ChampionItemProps> = ({idChamp}) => {
 
     return (
         <div>
-            <h1>{champion.name}</h1>
+            <h1 className="font-BeaufortForLOL text-[#67471f]">{champion.name}</h1>
             {championLoading ? (
                 <>
                     <p className="mb-3">{champion?.quote}</p>

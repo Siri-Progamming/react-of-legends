@@ -1,11 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'BeaufortForLOL': ['BeaufortForLOL'],
+        'Apercu': ['Apercu'],
+        'KDA' : ['KDA'],
+      },
+      colors:{
+        'lol-dark-brown' : '#67471f',
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 }

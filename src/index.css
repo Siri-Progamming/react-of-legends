@@ -3,12 +3,27 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'ApercuRegular';
-  src: url('assets/fonts/Apercu Regular.otf') format('otf');
+  font-family: 'Apercu';
+  src: url('assets/fonts/Apercu/Apercu Regular.otf') format('opentype');
   /* Ajoutez d'autres formats et variantes si nécessaire */
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'BeaufortForLOL';
+  src: url('assets/fonts/BeaufortForLOL/BeaufortforLOL-Medium.ttf') format('opentype');
+  /* Ajoutez d'autres formats et variantes si nécessaire */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KDA';
+  src: url('assets/fonts/KDA/KDA.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
