@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom"
 const Nav:React.FC = () => {
     return (
         <>
-            <div className="navbar h-fit-content">
-                <div className="navbar-start ml-5">
+            <div className="navbar">
+                <div className="navbar-start sm:ml-5">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -22,7 +22,7 @@ const Nav:React.FC = () => {
                             <li><a>Item 3</a></li>
                         </ul>
                     </div>
-                    <h1 className="font-KDA text-4xl
+                    <h1 className="font-KDA text-xl sm:text-4xl
                                    bg-gradient-to-br from-[#99f8fc] via-[#c0e0f7] to-[#c79dcd]
                                    inline-block text-transparent bg-clip-text">
                         {import.meta.env.VITE_APP_TITLE}
@@ -40,7 +40,7 @@ const Nav:React.FC = () => {
                     <div className="dropdown dropdown-end navbar-end text-right mr-5">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-20 rounded-full">
-                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <img alt="Profil icon" src="https://i.redd.it/ztufjdppq8r11.jpg" />
                         </div>
                     </div>
                     <nav tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -56,10 +56,9 @@ const Nav:React.FC = () => {
             </div>
             <div className="relative w-full h-[4px] my-4 overflow-hidden mt-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#99f8fc] via-[#c0e0f7] to-[#c79dcd]"></div>
-                <div className="absolute inset-0 bg-white w-1/3 mx-auto h-1"></div>
+
             </div>
         </>
-
     );
 }
 

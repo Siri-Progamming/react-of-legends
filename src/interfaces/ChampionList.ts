@@ -3,7 +3,7 @@ interface ChampionList {
     key?: number | 0;
     name?: string | '';
     title?: string | '';
-    'released-date'?: Date | null;
+    'releasedDate'?: Date | null;
     region?: string | '';
     info?: {
         attack?: number | 0;

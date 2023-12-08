@@ -12,7 +12,12 @@ module.exports = {
         'KDA' : ['KDA'],
       },
       colors:{
-        'lol-dark-brown' : '#67471f',
+        'primary' : '#c4b998',
+        'secondary' : '#937341',
+        'white' : '#f9f9f9',
+        'bg-cards-color' : '#0a0a0c',
+
+
       }
     },
   },
