@@ -13,6 +13,7 @@ const Champions = () => {
             const champKeys = Object.keys(dataChampions)
             setChampionKeys(champKeys)
             setChampionsList(dataChampions)
+
         }catch (error) {
             console.error('Error : ', error)
         }

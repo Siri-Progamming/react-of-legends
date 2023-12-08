@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#1B1D34]">
+      <div className="bg-[#1B1827]">
           <Nav />
       </div>
         <Routes>

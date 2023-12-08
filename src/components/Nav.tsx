@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 const Nav:React.FC = () => {
     return (
         <>
-            <div className="navbar bg-[#1B1D34] h-fit-content">
+            <div className="navbar h-fit-content">
                 <div className="navbar-start ml-5">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
