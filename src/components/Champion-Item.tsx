@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react"
 import TextToSpeech from "./TextToSpeech"
 import Champion from "../interfaces/Champion.ts"
 import axios from "axios";
+import '../index.css'
+import {useParams} from "react-router-dom";
 
-interface ChampionItemProps{
-    idChamp:string
-}
+// interface ChampionItemProps{
+//     idChamp:string
+// }
 
 interface RelatedChamp{
     id:string
@@ -13,13 +15,14 @@ interface RelatedChamp{
     name:string
 }
 
-const ChampionItem: React.FC<ChampionItemProps> = ({idChamp}) => {
+const ChampionItem: React.FC = () => {
+    const idChamp = useParams().idChamp
     const [champion, setChampion] = useState<Champion>(initChampion());
     const [championLoading, setChampionLoading] = useState<boolean>(false);
 
-    const getChampion = async (idChamp:string) => {
+    const getChampion = async (id:string) => {
         try{
-            const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion/${idChamp}.json`,
+            const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion/${id}.json`,
                 {
                     headers: {
                         //'Access-Control-Allow-Origin': '*',
@@ -27,7 +30,7 @@ const ChampionItem: React.FC<ChampionItemProps> = ({idChamp}) => {
                 })
 
             const data = await response.data
-            const championData = data.data[idChamp]
+            const championData = data.data[id]
 
             if(championData !== undefined){
                 console.log("Fetching Champion Detail SUCCESS")
@@ -125,18 +128,24 @@ const ChampionItem: React.FC<ChampionItemProps> = ({idChamp}) => {
         }
     }, [champion]);
 
-
+    function styleParagraph(text:string):string{
+        if(text !== undefined){
+            return text.replace(/<p>/g, '<p class="mb-6">')
+        } return ""
+    }
 
 
     return (
         <div>
-            <h1>{champion.name}</h1>
+            <h1 className="text-[#67471f]">{champion.name}</h1>
             {championLoading ? (
                 <>
                     <p className="mb-3">{champion?.quote}</p>
-                    <p className="mb-3">{champion?.shortLore}</p>
-                    <div className="mb-3" dangerouslySetInnerHTML={{ __html: champion?.fullLore }} />
-                    <TextToSpeech text={champion?.fullLore ?? ''} />
+                    <div className="w-[50%] mx-auto text-justify">
+                        <p className="mb-3" dangerouslySetInnerHTML={{ __html: champion?.shortLore}} />
+                        <p className="mb-3 " dangerouslySetInnerHTML={{ __html: styleParagraph(champion?.fullLore) }} />
+                        <TextToSpeech text={champion?.fullLore ?? ''} />
+                    </div>
                 </>
                 ) : 'Loading...'}
         </div>
