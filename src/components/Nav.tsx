@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 const Nav:React.FC = () => {
     return (
         <>
-            <div className="navbar">
+            <div className="navbar nav-divider sm:p-5">
                 <div className="navbar-start sm:ml-5">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -24,7 +24,7 @@ const Nav:React.FC = () => {
                     </div>
                     <h1 className="font-KDA text-xl sm:text-4xl
                                    bg-gradient-to-br from-[#99f8fc] via-[#c0e0f7] to-[#c79dcd]
-                                   inline-block text-transparent bg-clip-text">
+                                   inline-block text-transparent bg-clip-text hidden sm:block">
                         {import.meta.env.VITE_APP_TITLE}
                     </h1>
                 </div>
@@ -53,10 +53,6 @@ const Nav:React.FC = () => {
                     </nav>
                 </div>
                 </div>
-            </div>
-            <div className="relative w-full h-[4px] my-4 overflow-hidden mt-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#99f8fc] via-[#c0e0f7] to-[#c79dcd]"></div>
-
             </div>
         </>
     );

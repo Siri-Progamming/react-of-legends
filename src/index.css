@@ -3,112 +3,226 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Apercu';
-  src: url('assets/fonts/Apercu/Apercu Regular.otf') format('opentype');
-  /* Ajoutez d'autres formats et variantes si nécessaire */
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Apercu';
+    src: url('assets/fonts/Apercu/Apercu Regular.otf') format('opentype');
+    /* Ajoutez d'autres formats et variantes si nécessaire */
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'BeaufortForLOL';
-  src: url('assets/fonts/BeaufortForLOL/BeaufortforLOL-Medium.ttf') format('opentype');
-  /* Ajoutez d'autres formats et variantes si nécessaire */
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'BeaufortForLOL';
+    src: url('assets/fonts/BeaufortForLOL/BeaufortforLOL-Medium.ttf') format('opentype');
+    /* Ajoutez d'autres formats et variantes si nécessaire */
+    font-weight: normal;
+    font-style: normal;
 }
+
 @font-face {
-  font-family: 'KDA';
-  src: url('assets/fonts/KDA/KDA.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'KDA';
+    src: url('assets/fonts/KDA/KDA.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 :root {
-  font-family: BeaufortForLOL, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 200;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1B1827;
+    font-family: BeaufortForLOL, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 200;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #1B1827;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .w-screen-97 {
-  width: calc(100vw - 2.89%);
+    width: calc(100vw - 2.89%);
+}
+.background-home {
+    background-image: url('src/assets/img/kda-wll06.jpg'); /*1,6,7,8,9*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .8;
+    filter: hue-rotate(-10deg);
+    background-position: top;
+    z-index: -1;
+    height: 100vh;
+}
+.nav-divider {
+    border-bottom : 4px solid;
+    border-image-source: linear-gradient(to right, #99f8fc, #c0e0f7, #c79dcd);
+    border-image-slice: 1;
+    animation: gradient-rotate 1750ms infinite;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.cards {
+    transition-property: transform, scale;
+    transition-duration: 500ms, 500ms;
+    min-width: 250px;
+    max-height: 486px;
+    min-height: 486px;
+}
+.cards:hover {
+    border-width: 3px;
+    border-image-source: linear-gradient(to right, #99f8fc, #c0e0f7, #c79dcd);
+    border-image-slice: 1;
+    transform: scale(1.10);
+    animation: gradient-rotate 1750ms infinite;
+    max-height: 486px;
+    z-index: 2;
+}
+.cards:hover #hidden-element-card{
+    display: block;
 }
 
-.background-home{
-  background-image: url('src/assets/img/kda-wll06.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  top:0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: .8;
-  filter: hue-rotate(-10deg);
-  background-position: top;
-  z-index: -1;
-  height: 100vh;
+.cards:hover .champ-favorite-card{
+    animation: pulse 0.5s infinite;
+}
+.cards:hover .card-bottom {
+     margin-right: 1px;
+     margin-left: 1px;
+ }
+.cards:hover .card-top {
+      display: block;
+  }
+
+.champ-favorite-card:hover #hidden-full-heart{
+    display: block;
+}
+.champ-favorite-card:hover #empty-heart{
+    display: none;
+}
+.cards .card-top{
+    min-height: 40px;
+}
+.cards .card-bottom {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom:0;
+}
+
+@keyframes gradient-rotate {
+    12.5% {
+        border-image-source: linear-gradient(to bottom right, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    25% {
+        border-image-source: linear-gradient(to bottom, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    37.5% {
+        border-image-source: linear-gradient(to bottom left, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    50% {
+        border-image-source: linear-gradient(to left, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    62.5% {
+        border-image-source: linear-gradient(to top left, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    75% {
+        border-image-source: linear-gradient(to top, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    87.5% {
+        border-image-source: linear-gradient(to top right, #99f8fc, #c0e0f7, #c79dcd);
+    }
+
+    100% {
+        border-image-source: linear-gradient(to right, #99f8fc, #c0e0f7, #c79dcd);
+    }
+}
+
+.cards .champ-difficulty-card{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 20px;
+}
+.cards .champ-favorite-card{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 24px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
-/*a:hover {*/
-/*  color: #535bf2;*/
-/*}*/
 
 body {
-  margin: 0;
-  display: flex;
-  /*min-width: 320px;*/
-  /*min-height: 100vh;*/
+    margin: 0;
+    display: flex;
+    /*min-width: 320px;*/
+    /*min-height: 100vh;*/
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  /*border-radius: 8px;*/
-  /*border: 1px solid transparent;*/
-  /*padding: 0.6em 1.2em;*/
-  /*font-size: 1em;*/
-  /*font-weight: 500;*/
-  /*font-family: inherit;*/
-  /*background-color: #1a1a1a;*/
-  /*cursor: pointer;*/
-  /*transition: border-color 0.25s;*/
-}
-button:hover {
-  /*border-color: #646cff;*/
-}
-button:focus,
-button:focus-visible {
-  /*outline: 4px auto -webkit-focus-ring-color;*/
+    /*border-radius: 8px;*/
+    /*border: 1px solid transparent;*/
+    /*padding: 0.6em 1.2em;*/
+    /*font-size: 1em;*/
+    /*font-weight: 500;*/
+    /*font-family: inherit;*/
+    /*background-color: #1a1a1a;*/
+    /*cursor: pointer;*/
+    /*transition: border-color 0.25s;*/
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+    /*border-color: #646cff;*/
 }
+
+button:focus,
+button:focus-visible {
+    /*outline: 4px auto -webkit-focus-ring-color;*/
+}
+
+/*@media (prefers-color-scheme: light) {*/
+/*  :root {*/
+/*    color: #213547;*/
+/*    background-color: #ffffff;*/
+/*  }*/
+/*  a:hover {*/
+/*    color: #747bff;*/
+/*  }*/
+/*  button {*/
+/*    background-color: #f9f9f9;*/
+/*  }*/
+/*}*/

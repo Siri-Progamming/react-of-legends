@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import Champions from "./components/Champions.tsx";
 import ChampionItem from "./components/Champion-Item.tsx";
 
+
 function App() {
 
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/champions' element={<Champions />} />
             <Route path='/champions/:idChamp' element={<ChampionItem />} />
         </Routes>
+
     </>
   )
 }
