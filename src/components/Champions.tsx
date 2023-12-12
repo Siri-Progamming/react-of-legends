@@ -18,7 +18,7 @@ const Champions = () => {
             const response = await fetch('https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion.json')
             const data = await response.json()
             return data.data
-        }catch (error) {
+        } catch (error) {
             console.error('Une erreur s\'est produite lors de la récupération des informations relatives aux champions ', error)
         }
     }
@@ -28,7 +28,7 @@ const Champions = () => {
             const response = await fetch(import.meta.env.VITE_RIOT_CHAMPIONS_SPLASH)
             const data = await response.json()
             return data.champions
-        }catch (error){
+        } catch (error) {
             console.error('Une erreur s\'est produite lors de la récupération des informations supplémentaires relatives aux champions ', error)
         }
     }
@@ -89,18 +89,18 @@ const Champions = () => {
             console.log("NO MATCH FOUND FOR : ", noMatchedChamp)
             //             console.log("Roles : ", dataChampions[champKeys[i]]['tags'])
             console.log("Avant la mise à jour de l'état :", championsList)
-        }catch (error){
+        } catch (error) {
             console.error('Une erreur s\'est produite lors de la création de la liste des champions ', error)
         }
     }
-    const handleOnClickCard = (id:string) => {
+    const handleOnClickCard = (id: string) => {
         navigate(`/champions/${id}`)
     }
-const handleSearch = (list:Array<ChampionList>) => {
-    console.log("FILTERING...")
-    setIsFiltering(true)
-    setFilteredList(list)
-}
+    const handleSearch = (list: Array<ChampionList>) => {
+        console.log("FILTERING...")
+        setIsFiltering(true)
+        setFilteredList(list)
+    }
     useEffect(() => {
         createChampionsList()
     }, [])
@@ -112,13 +112,15 @@ const handleSearch = (list:Array<ChampionList>) => {
     }, [championsList])
 
     useEffect(() => {
-        console.log("Roles : ",roles)
+        console.log("Roles : ", roles)
     }, [roles]);
+
     function calculateBgPosition(width: number, height: number, x: number, y: number): string {
         const background_position_x = (x / width) * 100
         const background_position_y = (y / height) * 100
         return (background_position_x.toString() + "% " + background_position_y.toString() + "%")
     }
+
     function getRegionName(region: string): string {
         if (region === 'unaffiliated') {
             return 'runeterra'
@@ -133,20 +135,26 @@ const handleSearch = (list:Array<ChampionList>) => {
         }
         return region
     }
+
     function getRolesNames(roles: Array<string>): Array<string> {
         const rolesNames: Array<string> = []
-        if(roles.length > 0){
+        if (roles.length > 0) {
             roles.map((role) => {
                 role = role.toLowerCase()
-                switch(role){
-                    case 'fighter' : return rolesNames.push('combattant')
-                    case 'marksman' : return rolesNames.push('tireur')
-                    default : return rolesNames.push(role)
+                switch (role) {
+                    case 'fighter' :
+                        return rolesNames.push('combattant')
+                    case 'marksman' :
+                        return rolesNames.push('tireur')
+                    default :
+                        return rolesNames.push(role)
                 }
             })
             return rolesNames
-        }return roles
+        }
+        return roles
     }
+
     function getDifficultyName(difficulty: number): string {
         if (difficulty < 4) {
             return '★☆☆'
@@ -156,6 +164,7 @@ const handleSearch = (list:Array<ChampionList>) => {
             return '★★★'
         }
     }
+
     const FavIcon = () => {
         return (
             <div className="champ-favorite-card mt-2 mr-2">
@@ -180,28 +189,26 @@ const handleSearch = (list:Array<ChampionList>) => {
             </div>
         );
     };
-    const getRegions = (region:string) => {
-        if(!regions.includes(region)){
+    const getRegions = (region: string) => {
+        if (!regions.includes(region)) {
             setRegions(prevRegions => [...prevRegions, region])
         }
     }
     const getRoles = (champRoles: Array<string>) => {
         champRoles.map((role) => {
-            if(!roles.includes(role)){
+            if (!roles.includes(role)) {
                 setRoles(prevRoles => [...prevRoles, role])
             }
         })
-    }
-
     }
 
     return (
         <>
             <div className="my-8">
                 <Filter champions={championsList} handleSearch={handleSearch}
-                            regions={Array.from(new Set(regions))}
-                            roles={Array.from(new Set(roles))}
-                            getDifficultyName={getDifficultyName}
+                        regions={Array.from(new Set(regions))}
+                        roles={Array.from(new Set(roles))}
+                        getDifficultyName={getDifficultyName}
                 />
             </div>
             {filteredList.length > 0 ?
@@ -221,7 +228,8 @@ const handleSearch = (list:Array<ChampionList>) => {
                                     <div>
                                         <div
                                             className="card-top bg-black bg-opacity-70 backdrop-blur-sm  border-b border-[#937341] hidden">
-                                            <div className="champ-difficulty-card flex flex-row ml-2 text-[#937341] text-3xl">
+                                            <div
+                                                className="champ-difficulty-card flex flex-row ml-2 text-[#937341] text-3xl">
                                                 {getDifficultyName(champion.info?.difficulty)}
                                             </div>
                                             <FavIcon/>
@@ -267,15 +275,15 @@ const handleSearch = (list:Array<ChampionList>) => {
                     </div>
                 </>
                 :
-                ( !isFiltering ?
-                    <div className="flex flex-row items-center justify-center w-screen-97 h-screen">
-                        <span className="loading loading-ring text-info w-[150px]"></span>
-                    </div>
+                (!isFiltering ?
+                        <div className="flex flex-row items-center justify-center w-screen-97 h-screen">
+                            <span className="loading loading-ring text-info w-[150px]"></span>
+                        </div>
                         :
-                    <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
-                        <img src="src/assets/img/png/cry_poro.png" className="w-[64px] h-[64px]"/>
-                        <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
-                    </div>
+                        <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
+                            <img src="src/assets/img/png/cry_poro.png" className="w-[64px] h-[64px]"/>
+                            <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
+                        </div>
                 )
             }
         </>
