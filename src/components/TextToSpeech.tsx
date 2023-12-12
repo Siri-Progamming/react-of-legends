@@ -29,6 +29,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
 
     const handleResumeSpeak = () => {
         window.speechSynthesis.resume()
+        setIsSpeaking(true);
         setIsPaused(false)
     }
 
@@ -54,9 +55,9 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
 
     return (
         <div>
-            {isPaused && textToSpeak !== '' ? <button onClick={handleResumeSpeak}>Reprendre</button> : <button onClick={handleSpeak}>Lecture</button>}
-            {isSpeaking && <button onClick={handleStopSpeak}>Stop</button>}
-            {isSpeaking && <button onClick={handlePauseSpeak}>Pause</button>}
+            {isPaused && textToSpeak !== '' ? <button className="btn" onClick={handleResumeSpeak}>▶</button> : <button className="btn" onClick={handleSpeak}>▶</button>}
+            {isSpeaking && <button className="btn" onClick={handlePauseSpeak}>⏸</button>}
+            {isPaused || isSpeaking && <button className="btn" onClick={handleStopSpeak}>◼</button>}
         </div>
     )
 }

@@ -18,7 +18,7 @@ interface RelatedChamp{
 const ChampionItem: React.FC = () => {
     const idChamp = useParams().idChamp
     const [champion, setChampion] = useState<Champion>(initChampion());
-    const [championLoading, setChampionLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const getChampion = async (id:string) => {
         try{
@@ -124,7 +124,7 @@ const ChampionItem: React.FC = () => {
 
 
         if(champion.fullLore !== '' && champion.shortLore !== '' && champion.quote !== ''){
-            setChampionLoading(true);
+            setIsLoading(true);
         }
     }, [champion]);
 
@@ -134,20 +134,23 @@ const ChampionItem: React.FC = () => {
         } return ""
     }
 
-
     return (
         <div>
             <h1 className="text-[#67471f]">{champion.name}</h1>
-            {championLoading ? (
+            {isLoading ? (
                 <>
-                    <p className="mb-3">{champion?.quote}</p>
-                    <div className="w-[50%] mx-auto text-justify">
-                        <p className="mb-3" dangerouslySetInnerHTML={{ __html: champion?.shortLore}} />
-                        <p className="mb-3 " dangerouslySetInnerHTML={{ __html: styleParagraph(champion?.fullLore) }} />
-                        <TextToSpeech text={champion?.fullLore ?? ''} />
+                    <p className="mb-3 text-[#c4b998]">{champion?.quote}</p>
+                    <div className="w-[30%] mx-auto p-5 bg-white bg-opacity-[3%] text-justify border-[#937341] border-[2px]" id="champion-lore">
+                        {/*<p className="mb-3" dangerouslySetInnerHTML={{__html: champion?.shortLore}}/>*/}
+                        <p className="mb-3 " dangerouslySetInnerHTML={{__html: styleParagraph(champion?.fullLore)}}/>
+                        <TextToSpeech text={champion?.fullLore ?? ''}/>
                     </div>
                 </>
-                ) : 'Loading...'}
+            )
+            :
+            <div className="flex flex-row items-center justify-center w-screen-97 h-screen">
+                <span className="loading loading-ring text-info w-[150px]"></span>
+            </div>}
         </div>
     )
 }

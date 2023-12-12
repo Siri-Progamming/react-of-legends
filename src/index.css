@@ -71,6 +71,7 @@
     transition-property: transform, scale;
     transition-duration: 500ms, 500ms;
     min-width: 250px;
+    max-width: calc(100% - 5%);
     max-height: 486px;
     min-height: 486px;
 }
@@ -175,6 +176,19 @@
     }
 }
 
+/* Champion-Item */
+#champion-lore p:nth-child(1)::first-letter {
+    font-size:61px;
+    color: #937341;
+    font-weight: bolder;
+    float: left;
+    margin-right : 10px;
+    margin-top: -20px;
+    text-shadow:1px 1px 0px #fff;
+}
+#champion-lore{
+    min-width: 320px;
+}
 a {
     font-weight: 500;
     color: #646cff;

@@ -10,15 +10,12 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#1B1827]">
-          <Nav />
-      </div>
+        <Nav />
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/champions' element={<Champions />} />
             <Route path='/champions/:idChamp' element={<ChampionItem />} />
         </Routes>
-
     </>
   )
 }
