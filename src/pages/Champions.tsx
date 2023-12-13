@@ -179,7 +179,7 @@ const Champions = () => {
                     id="empty-heart"
                 />
                 <img
-                    src="../assets/img/ico/heart_full.png"
+                    src="./img/ico/heart_full.png"
                     alt="Full Heart"
                     className="relative hidden"
                     style={{zIndex: 1}}
