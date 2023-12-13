@@ -1,4 +1,4 @@
-interface ChampionList {
+export interface ChampionList {
     id?: string | '';
     key?: number | 0;
     name?: string | '';
@@ -11,14 +11,12 @@ interface ChampionList {
         magic?: number | 0;
         difficulty?: number | 0;
     }
-    image?: {
-        uri?: string | '',
-        width?: number | 0,
-        height?: number | 0,
-        x?: number | 0,
-        y?: number | 0
+    image: {
+        uri: string | '',
+        width: number | 0,
+        height: number | 0,
+        x: number | 0,
+        y: number | 0
     }
     roles?: Array<string> | [];
 }
-
-export default ChampionList;

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import ChampionList from "../interfaces/ChampionList.ts";
+import {ChampionList} from "../interfaces/ChampionList.ts";
 
 interface FilterProps {
     champions: Array<ChampionList>
-    handleSearch: Array<ChampionList>
+    handleSearch: (championLists: ChampionList[]) => void
     regions: Array<string>
     roles: Array<string>
     getDifficultyName: (difficulty: number) => string
@@ -11,8 +11,10 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles, getDifficultyName}) => {
     const [search, setSearch] = useState<string>('')
+/*
     const difficulties = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
+*/
+    console.log(getDifficultyName)
     const filterByName = (name: string) => {
         setSearch(name)
         handleSearch(champions.filter((champion) => {
@@ -38,9 +40,9 @@ const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles,
         }))
     }
 
-    const filterByDifficulty = (difficulty: number) => {
+/*    const filterByDifficulty = (difficulty: number) => {
 
-    }
+    }*/
 
     useEffect(() => {
         console.log(search)

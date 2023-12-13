@@ -1,16 +1,17 @@
 import {useEffect, useState} from "react";
-import ChampionList from "../interfaces/ChampionList.ts";
+import {ChampionList} from "../interfaces/ChampionList.ts";
 import {useNavigate} from "react-router-dom";
-import Filter from "./Filter.tsx";
+import Filter from "../components/Filter.tsx";
 
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
-    const navigate = useNavigate()
     const [filteredList, setFilteredList] = useState<Array<ChampionList>>([])
     const [isFiltering, setIsFiltering] = useState<boolean>(false)
     const [regions, setRegions] = useState<Array<string>>([])
     const [roles, setRoles] = useState<Array<string>>([])
-    const [difficulties, setDifficulties] = useState<Array<string>>([])
+/* const [difficulties, setDifficulties] = useState<Array<string>>([]) */
+
+    const navigate = useNavigate()
 
     const getChampions = async () => {
         console.log("GET champions - ddragon")
@@ -39,7 +40,7 @@ const Champions = () => {
             const dataChampions2 = await getMoreChampionsDetails()
 
             //Les nouveaux champions qui viennent de sortir peuvent ne pas être présents dans le JSON de l'API ddragon
-            let noMatchedChamp: Array<string> = []
+            const noMatchedChamp: Array<string> = []
 
             for (let j = 0; j < dataChampions2.length; j++) {
                 let matchedSomeone = false
@@ -93,10 +94,11 @@ const Champions = () => {
             console.error('Une erreur s\'est produite lors de la création de la liste des champions ', error)
         }
     }
-    const handleOnClickCard = (id: string) => {
+    const handleOnClickCard = (id: string|undefined) => {
+        if (id === undefined) return;
         navigate(`/champions/${id}`)
     }
-    const handleSearch = (list: Array<ChampionList>) => {
+    const handleSearch = (list: ChampionList[]) => {
         console.log("FILTERING...")
         setIsFiltering(true)
         setFilteredList(list)
@@ -155,7 +157,8 @@ const Champions = () => {
         return roles
     }
 
-    function getDifficultyName(difficulty: number): string {
+    function getDifficultyName(difficulty: number|undefined): string {
+        if (difficulty === undefined) return '☆☆☆';
         if (difficulty < 4) {
             return '★☆☆'
         } else if (difficulty < 7) {
@@ -176,7 +179,7 @@ const Champions = () => {
                     id="empty-heart"
                 />
                 <img
-                    src="src/assets/img/ico/heart_full.png"
+                    src="../assets/img/ico/heart_full.png"
                     alt="Full Heart"
                     className="relative hidden"
                     style={{zIndex: 1}}
@@ -224,7 +227,7 @@ const Champions = () => {
                                     }}
                                     key={champion.id}
                                     id={champion.id}
-                                    onClick={() => handleOnClickCard(champion.id)}>
+                                    onClick={() => handleOnClickCard(champion?.id)}>
                                     <div>
                                         <div
                                             className="card-top bg-black bg-opacity-70 backdrop-blur-sm  border-b border-[#937341] hidden">
@@ -281,7 +284,7 @@ const Champions = () => {
                         </div>
                         :
                         <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
-                            <img src="src/assets/img/png/cry_poro.png" className="w-[64px] h-[64px]"/>
+                            <img src="../assets/img/png/cry_poro.png" className="w-[64px] h-[64px]"/>
                             <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
                         </div>
                 )

@@ -3,10 +3,10 @@ interface TextToSpeechProps {
     text: string;
 }
 const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
-    const [textToSpeak] = useState<string>(removeHtmlTags(text))
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
-    const [speech] = useState<SpeechSynthesisUtterance>(new SpeechSynthesisUtterance(textToSpeak))
+
+    const speech = new SpeechSynthesisUtterance(removeHtmlTags(text))
     const handleSpeak = () => {
         if('speechSynthesis' in window){
             window.speechSynthesis.speak(speech);
@@ -55,7 +55,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = ({ text }) => {
 
     return (
         <div>
-            {isPaused && textToSpeak !== '' ? <button className="btn" onClick={handleResumeSpeak}>▶</button> : <button className="btn" onClick={handleSpeak}>▶</button>}
+            {isPaused && text !== '' ? <button className="btn" onClick={handleResumeSpeak}>▶</button> : <button className="btn" onClick={handleSpeak}>▶</button>}
             {isSpeaking && <button className="btn" onClick={handlePauseSpeak}>⏸</button>}
             {isPaused || isSpeaking && <button className="btn" onClick={handleStopSpeak}>◼</button>}
         </div>
