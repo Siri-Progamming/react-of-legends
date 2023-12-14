@@ -3,7 +3,14 @@ import {ChampionList} from "../interfaces/Champion.ts";
 import {useNavigate} from "react-router-dom";
 import Filter from "../components/Filter.tsx";
 import axios from "axios";
-import {DDRAGON_API_BEGIN, DDRAGON_API_LAST_VERSION, DDRAGON_API_AFTER_VERSION,DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END, MEEP_API_CHAMPIONS_SPLASH} from "../constantes/constantes.ts";
+import {
+    DDRAGON_API_BEGIN,
+    DDRAGON_API_LAST_VERSION,
+    DDRAGON_API_AFTER_VERSION,
+    DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END,
+    MEEP_API_CHAMPIONS_SPLASH
+} from "../constantes/constantes.ts";
+import {useChampionsContext} from "../context/useChampionsContext.tsx";
 
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
@@ -14,10 +21,12 @@ const Champions = () => {
     //const [isFilteringEffect, setIsFilteringEffect] = useState<boolean>(false)
     //const [difficulties, setDifficulties] = useState<Array<string>>([])
 
+    const {setChampionsContext} = useChampionsContext()
     const navigate = useNavigate()
 
+
     const getChampions = async () => {
-        const DDRAGON_API_CHAMPIONS = DDRAGON_API_BEGIN+ DDRAGON_API_LAST_VERSION + DDRAGON_API_AFTER_VERSION + DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END
+        const DDRAGON_API_CHAMPIONS = DDRAGON_API_BEGIN + DDRAGON_API_LAST_VERSION + DDRAGON_API_AFTER_VERSION + DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END
         try {
             const response = await axios.get(DDRAGON_API_CHAMPIONS)
             return response.data.data
@@ -93,9 +102,9 @@ const Champions = () => {
             console.error('Une erreur s\'est produite lors de la création de la liste des champions ', error)
         }
     }
-    const handleOnClickCard = (champion:ChampionList) => {
-       if(champion.id === undefined) return
-        navigate(`/champions/${champion.id}`, {state: champion})
+    const handleOnClickCard = (champion: ChampionList) => {
+        if (champion.id === undefined) return
+        navigate(`/champions/${champion.id}#champion-page-image`, {state: champion})
     }
     const handleSearch = (list: ChampionList[]) => {
         setFilteredList(list)
@@ -120,6 +129,7 @@ const Champions = () => {
 
     useEffect(() => {
         setFilteredList(championsList)
+        if(championsList.length > 0) setChampionsContext(championsList)
     }, [championsList])
 
     function calculateBgPosition(width: number, height: number, x: number, y: number): string {
@@ -177,14 +187,14 @@ const Champions = () => {
         return (
             <div className="champ-favorite-card mt-2 mr-2">
                 <img
-                    src="src/assets/img/ico/heart_empty.png"
+                    src="public/img/ico/heart_empty.png"
                     alt="Empty Heart"
                     className="relative hover:hidden"
                     style={{zIndex: 1}}
                     id="empty-heart"
                 />
                 <img
-                    src="./img/ico/heart_full.png"
+                    src="public/img/ico/heart_full.png"
                     alt="Full Heart"
                     className="relative hidden"
                     style={{zIndex: 1}}
@@ -257,19 +267,19 @@ const Champions = () => {
                                                 <div className="flex flex-row items-center justify-center">
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-red-500">
-                                                        <img className="w-[16px]" src="src/assets/img/ico/attack.png"
+                                                        <img className="w-[16px]" src="public/img/ico/attack.png"
                                                              title="Attaque" alt="attack_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.attack}</p>
                                                     </div>
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-[#937341] ">
-                                                        <img className="w-[16px]" src="src/assets/img/ico/defense.png"
+                                                        <img className="w-[16px]" src="public/img/ico/defense.png"
                                                              title="Défense" alt="defense_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.defense}</p>
                                                     </div>
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-blue-300">
-                                                        <img className="w-[14px]" src="src/assets/img/ico/magic.png"
+                                                        <img className="w-[14px]" src="public/img/ico/magic.png"
                                                              title="Magie" alt="magic_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.magic}</p>
                                                     </div>
@@ -289,7 +299,7 @@ const Champions = () => {
                         </div>
                         :
                         <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
-                            <img src="./img/png/cry_poro.png" className="w-[64px] h-[64px]" alt="sad poro"/>
+                            <img src="public/img/png/cry_poro.png" className="w-[64px] h-[64px]" alt="sad poro"/>
                             <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
                         </div>
                 )

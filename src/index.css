@@ -46,7 +46,7 @@
 }
 
 .background-home {
-    background-image: url('src/assets/img/kda-wll06.jpg'); /*1,6,7,8,9*/
+    background-image: url('public/img/kda-wll06.jpg'); /*1,6,7,8,9*/
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
@@ -59,6 +59,54 @@
     background-position: top;
     z-index: -1;
     height: 100vh;
+}
+#background-champion-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    filter: blur(8px);
+    object-fit: cover;
+    object-position: center 20%;
+    animation: gradient-opacity-0-03 1750ms;
+    opacity: 0.3;
+}
+@keyframes gradient-opacity-0-03 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+@keyframes gradient-opacity-0-1 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+#champion-page-body{
+    box-sizing: border-box;
+    margin: auto;
+    max-width: 65%;
+    padding: 0.625rem;
+}
+#champion-page-image{
+    padding-bottom: 59.01%;
+    mask-image: linear-gradient(to top, transparent 0%, transparent 0%, white 15%, white 100%);
+    -webkit-mask-composite: source-out;
+    mask-composite: exclude;
+    z-index: -1;
+    margin-top: 1.5%;
+    animation: gradient-opacity-0-1 1750ms;
+}
+#champion-page-infos{
+    margin-top: -15%;
 }
 
 .nav-divider {
