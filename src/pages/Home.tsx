@@ -1,5 +1,5 @@
 //import {useEffect, useState} from "react";
-import { SLOGAN_LOL } from "../constantes/constantes.ts";
+import { SLOGGAN_LOL } from "../constantes/constantes.ts";
 //import {useAuthentication} from "../context/useAuthentication.tsx";
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
             <div className="background-home min-h-screen flex-col items-center justify-center backdrop-blur-md relative">
                 <div
                     className="absolute bottom-0 left-0 w-full h-32 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm">
-                    <p>{SLOGAN_LOL}</p>
+                    <p className="text-[30px]">{SLOGGAN_LOL}</p>
                 </div>
                 {/*<div className="absolute top-0 left-0">*/}
                 {/*    {isPlaying ? (<audio autoPlay loop>*/}

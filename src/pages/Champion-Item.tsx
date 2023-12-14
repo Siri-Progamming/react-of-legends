@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react"
 import TextToSpeech from "../components/TextToSpeech.tsx"
-import Champion from "../interfaces/Champion.ts"
+import {Champion, ChampionList} from "../interfaces/Champion.ts"
 import axios from "axios";
 import '../index.css'
-import {useParams} from "react-router-dom";
-
-// interface ChampionItemProps{
-//     idChamp:string
-// }
+import {useParams, useLocation} from "react-router-dom";
+import {DDRAGON_API_BEGIN, DDRAGON_API_LAST_VERSION, DDRAGON_API_AFTER_VERSION, DDRAGON_API_AFTER_LOCALE_CHAMPION,
+            DDRAGON_API_AFTER_LOCALE_CHAMPION_END,
+            MEEP_API_STORY_BEGIN, MEEP_API_STORY_END} from "../constantes/constantes.ts";
 
 /*interface RelatedChamp{
     id:string
@@ -20,22 +19,45 @@ const ChampionItem: React.FC = () => {
     const [champion, setChampion] = useState<Champion>(initChampion());
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    const location = useLocation();
+    const championInfo = location.state as ChampionList;
+
     const getChampion = async (id: string) => {
+        id = id.charAt(0).toUpperCase() + id.slice(1)
+        const DDRAGON_API_CHAMPION = DDRAGON_API_BEGIN+DDRAGON_API_LAST_VERSION+DDRAGON_API_AFTER_VERSION+DDRAGON_API_AFTER_LOCALE_CHAMPION+id+DDRAGON_API_AFTER_LOCALE_CHAMPION_END
         try {
-            const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion/${id}.json`,
-                {
-                    headers: {
-                        //'Access-Control-Allow-Origin': '*',
-                    },
-                })
+            const response = await axios.get(DDRAGON_API_CHAMPION)
+            return response.data.data[id]
+        } catch (error) {
+            console.error('Error : ', error)
+        }
+    }
+    const getChampionStory = async (id:string) => {
+        id = idChamp.toLowerCase()
+        if (id === 'renata') {
+            id = 'renataglasc'
+        }
+        const MEEP_API_STORY = MEEP_API_STORY_BEGIN+id+MEEP_API_STORY_END
+        try {
+            const response = await fetch(MEEP_API_STORY)
+            return  await response.json()
+        } catch (error) {
+            console.error('Error : ', error)
+        }
+    }
 
-            const data = await response.data
-            const championData = data.data[id]
+    const createChampion = async (id:string) => {
+        try{
+            const championData = await getChampion(id)
+            const championStoryAndRel = await getChampionStory(id)
 
-            if (championData !== undefined) {
-                console.log("Fetching Champion Detail SUCCESS")
-                console.log(championData)
-            }
+            const dataChamp = championStoryAndRel['champion']
+            const dataRelatedChampions = championStoryAndRel['related-champions']
+            // console.log("Champion infos from meeps : ", dataChamp)
+            // console.log("Related champions : ", dataRelatedChampions)
+            const relatedChampions = dataRelatedChampions.map((champ: { name: string }) => ({
+                name: champ.name
+            }));
 
             setChampion((prevChampion) => ({
                 ...prevChampion,
@@ -43,45 +65,19 @@ const ChampionItem: React.FC = () => {
                 key: championData.key,
                 name: championData.name,
                 title: championData.title,
+                shortLore: dataChamp['biography']['short'],
+                fullLore: dataChamp['biography']['full'],
+                quote: dataChamp['biography']['quote'],
+                'related-champions': relatedChampions
                 //TODO images
                 //TODO Skins boucle -> nums
                 //TODO allyTips
                 //TODO enemyTips
             }));
-
-        } catch (error) {
+        }catch(error){
             console.error('Error : ', error)
         }
     }
-    const getChampionStory = async () => {
-        try {
-            const jsonStoryLink = `https://universe-meeps.leagueoflegends.com/v1/fr_fr/champions/${idChamp.toLowerCase()}/index.json`;
-            const response = await fetch(jsonStoryLink)
-            const data = await response.json()
-
-            const dataChamp = data['champion']
-            console.log(dataChamp)
-
-            const dataRelatedChampions = data['related-champions']
-            console.log(dataRelatedChampions)
-            /*            const relatedChampions:RelatedChamp[] = dataRelatedChampions.map((champ:RelatedChamp) => ({
-                            id: champ.id,
-                            key: champ.key,
-                            name: champ.name
-                        }));*/
-
-
-            setChampion((prevChampion) => ({
-                ...prevChampion,
-                shortLore: dataChamp['biography']['short'],
-                fullLore: dataChamp['biography']['full'],
-                quote: dataChamp['biography']['quote']
-            }));
-        } catch (error) {
-            console.error('Error : ', error)
-        }
-    }
-
     function initChampion(): Champion {
         console.log('Initialising champion')
         return {
@@ -89,15 +85,23 @@ const ChampionItem: React.FC = () => {
             key: 0,
             name: '',
             title: '',
-            'released-date': null,
+            releasedDate: null,
             region: '',
+            info: {
+                attack: 0,
+                defense: 0,
+                magic: 0,
+                difficulty: 0,
+            },
             shortLore: '',
             fullLore: '',
             quote: '',
             image: {
-                full: '',
-                loading: '',
-                square: '',
+                uri: '',
+                width: 0,
+                height: 0,
+                x: 0,
+                y: 0,
             },
             skins: [],
             allyTips: [],
@@ -114,19 +118,20 @@ const ChampionItem: React.FC = () => {
     }
 
     useEffect(() => {
-        getChampion(idChamp)
-        getChampionStory()
+        console.log("Champion Info from champions list : ", championInfo)
+        createChampion(idChamp)
     }, []);
 
     useEffect(() => {
 
-        console.log("Champion id :", champion.id)
-        console.log("Champion key :", champion.key)
-
+        console.log("Champion id : ", champion.id)
+        console.log("Champion key : ", champion.key)
+        console.log("Champion Objet : ", champion)
 
         if (champion.fullLore !== '' && champion.shortLore !== '' && champion.quote !== '') {
             setIsLoading(true);
         }
+
     }, [champion]);
 
     function styleParagraph(text: string | undefined): string {

@@ -1,7 +1,9 @@
 import {useEffect, useState} from "react";
-import {ChampionList} from "../interfaces/ChampionList.ts";
+import {ChampionList} from "../interfaces/Champion.ts";
 import {useNavigate} from "react-router-dom";
 import Filter from "../components/Filter.tsx";
+import axios from "axios";
+import {DDRAGON_API_BEGIN, DDRAGON_API_LAST_VERSION, DDRAGON_API_AFTER_VERSION,DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END, MEEP_API_CHAMPIONS_SPLASH} from "../constantes/constantes.ts";
 
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
@@ -15,11 +17,10 @@ const Champions = () => {
     const navigate = useNavigate()
 
     const getChampions = async () => {
-        console.log("GET champions - ddragon")
+        const DDRAGON_API_CHAMPIONS = DDRAGON_API_BEGIN+ DDRAGON_API_LAST_VERSION + DDRAGON_API_AFTER_VERSION + DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END
         try {
-            const response = await fetch('https://ddragon.leagueoflegends.com/cdn/13.23.1/data/fr_FR/champion.json')
-            const data = await response.json()
-            return data.data
+            const response = await axios.get(DDRAGON_API_CHAMPIONS)
+            return response.data.data
         } catch (error) {
             console.error('Une erreur s\'est produite lors de la récupération des informations relatives aux champions ', error)
         }
@@ -27,7 +28,7 @@ const Champions = () => {
     //Other Call to a JSON with more details like pictures.
     const getMoreChampionsDetails = async () => {
         try {
-            const response = await fetch(import.meta.env.VITE_RIOT_CHAMPIONS_SPLASH)
+            const response = await fetch(MEEP_API_CHAMPIONS_SPLASH)
             const data = await response.json()
             return data.champions
         } catch (error) {
@@ -39,7 +40,6 @@ const Champions = () => {
             const dataChampions = await getChampions()
             const champKeys = Object.keys(dataChampions)
             const dataChampions2 = await getMoreChampionsDetails()
-
             //Les nouveaux champions qui viennent de sortir peuvent ne pas être présents dans le JSON de l'API ddragon
             const noMatchedChamp: Array<string> = []
 
@@ -93,9 +93,9 @@ const Champions = () => {
             console.error('Une erreur s\'est produite lors de la création de la liste des champions ', error)
         }
     }
-    const handleOnClickCard = (id: string | undefined) => {
-        if (id === undefined) return;
-        navigate(`/champions/${id}`)
+    const handleOnClickCard = (champion:ChampionList) => {
+       if(champion.id === undefined) return
+        navigate(`/champions/${champion.id}`, {state: champion})
     }
     const handleSearch = (list: ChampionList[]) => {
         setFilteredList(list)
@@ -232,7 +232,7 @@ const Champions = () => {
                                     }}
                                     key={champion.id}
                                     id={champion.id}
-                                    onClick={() => handleOnClickCard(champion?.id)}>
+                                    onClick={() => handleOnClickCard(champion)}>
                                     <div>
                                         <div
                                             className="card-top bg-black bg-opacity-70 backdrop-blur-sm  border-b border-[#937341] hidden">
@@ -289,7 +289,7 @@ const Champions = () => {
                         </div>
                         :
                         <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
-                            <img src="../../public/img/png/cry_poro.png" className="w-[64px] h-[64px]" alt="sad poro"/>
+                            <img src="./img/png/cry_poro.png" className="w-[64px] h-[64px]" alt="sad poro"/>
                             <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
                         </div>
                 )

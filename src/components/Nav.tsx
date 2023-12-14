@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from "react-router-dom"
+import {APP_TITLE} from "../constantes/constantes.ts";
 
 const Nav:React.FC = () => {
     return (
@@ -25,7 +26,7 @@ const Nav:React.FC = () => {
                     <h1 className="font-KDA text-xl sm:text-4xl
                                    bg-gradient-to-br from-[#99f8fc] via-[#c0e0f7] to-[#c79dcd]
                                    inline-block text-transparent bg-clip-text hidden sm:block">
-                        {import.meta.env.VITE_APP_TITLE}
+                        {APP_TITLE}
                     </h1>
                 </div>
                 <div className="navbar-center hidden lg:flex">

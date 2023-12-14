@@ -1,18 +1,30 @@
-interface Champion {
+export interface ChampionList {
     id?: string | '';
     key?: number | 0;
     name?: string | '';
     title?: string | '';
-    'released-date'?: Date | null;
+    'releasedDate'?: Date | null;
     region?: string | '';
+    info: {
+        attack: number | 0;
+        defense: number | 0;
+        magic: number | 0;
+        difficulty: number | 0;
+    }
+    image: {
+        uri: string | '',
+        width: number | 0,
+        height: number | 0,
+        x: number | 0,
+        y: number | 0
+    }
+    roles?: Array<string> | [];
+}
+
+export interface Champion extends ChampionList{
     shortLore?: string | '';
     fullLore?: string | '';
     quote?: string | '',
-    image: {
-        full?: string | '';
-        loading?: string | '';
-        square?: string | '';
-    };
     skins?: Array<{
         id?: string | '';
         num?: number | 0;
@@ -21,7 +33,6 @@ interface Champion {
     }> | [];
     allyTips?: Array<string> | [];
     enemyTips?: Array<string> | [];
-    roles?: Array<string> | [];
     spells?: Array<{
         id?: string | '';
         name?: string | '';
@@ -35,4 +46,3 @@ interface Champion {
     };
     'related-champions': Array<string> | []
 }
-export default Champion;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ChampionList} from "../interfaces/ChampionList.ts";
+import {ChampionList} from "../interfaces/Champion.ts";
 
 interface FilterProps {
     champions: Array<ChampionList>
