@@ -5,11 +5,11 @@ export interface ChampionList {
     title?: string | '';
     'releasedDate'?: Date | null;
     region?: string | '';
-    info?: {
-        attack?: number | 0;
-        defense?: number | 0;
-        magic?: number | 0;
-        difficulty?: number | 0;
+    info: {
+        attack: number | 0;
+        defense: number | 0;
+        magic: number | 0;
+        difficulty: number | 0;
     }
     image: {
         uri: string | '',

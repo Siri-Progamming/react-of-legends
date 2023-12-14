@@ -6,10 +6,11 @@ import Filter from "../components/Filter.tsx";
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
     const [filteredList, setFilteredList] = useState<Array<ChampionList>>([])
-    const [isFiltering, setIsFiltering] = useState<boolean>(false)
+    const [isFilteredListEmpty, setIsFilteredListEmpty] = useState<boolean>(false)
     const [regions, setRegions] = useState<Array<string>>([])
     const [roles, setRoles] = useState<Array<string>>([])
-/* const [difficulties, setDifficulties] = useState<Array<string>>([]) */
+    //const [isFilteringEffect, setIsFilteringEffect] = useState<boolean>(false)
+    //const [difficulties, setDifficulties] = useState<Array<string>>([])
 
     const navigate = useNavigate()
 
@@ -88,34 +89,38 @@ const Champions = () => {
                 }
             }
             console.log("NO MATCH FOUND FOR : ", noMatchedChamp)
-            //             console.log("Roles : ", dataChampions[champKeys[i]]['tags'])
-            console.log("Avant la mise à jour de l'état :", championsList)
         } catch (error) {
             console.error('Une erreur s\'est produite lors de la création de la liste des champions ', error)
         }
     }
-    const handleOnClickCard = (id: string|undefined) => {
+    const handleOnClickCard = (id: string | undefined) => {
         if (id === undefined) return;
         navigate(`/champions/${id}`)
     }
     const handleSearch = (list: ChampionList[]) => {
-        console.log("FILTERING...")
-        setIsFiltering(true)
         setFilteredList(list)
+        setIsFilteredListEmpty(true)
+        //Juste pour le swag
+        // const timeout2 = setTimeout(() => {
+        //     setIsFilteringEffect(true)
+        //     clearTimeout(timeout2);
+        // }, 70)
+        // const timeout = setTimeout(() => {
+        //     if(list.length === 0) setIsFilteredListEmpty(true)
+        //     setIsFilteringEffect(false)
+        //     clearTimeout(timeout);
+        // }, 400)
+
+        // fading ${isFilteringEffect ? '' : 'isVisible'}
     }
+
     useEffect(() => {
         createChampionsList()
     }, [])
 
     useEffect(() => {
-        console.log("Taille de la liste des champions :", championsList.length)
-        console.log("Taille de la liste des champions filtrés :", filteredList.length)
         setFilteredList(championsList)
     }, [championsList])
-
-    useEffect(() => {
-        console.log("Roles : ", roles)
-    }, [roles]);
 
     function calculateBgPosition(width: number, height: number, x: number, y: number): string {
         const background_position_x = (x / width) * 100
@@ -157,11 +162,11 @@ const Champions = () => {
         return roles
     }
 
-    function getDifficultyName(difficulty: number|undefined): string {
+    function getDifficultyName(difficulty: number | undefined): string {
         if (difficulty === undefined) return '☆☆☆';
         if (difficulty < 4) {
             return '★☆☆'
-        } else if (difficulty < 7) {
+        } else if (difficulty < 8) {
             return '★★☆'
         } else {
             return '★★★'
@@ -207,11 +212,10 @@ const Champions = () => {
 
     return (
         <>
-            <div className="my-8">
+            <div className="my-8 mx-auto">
                 <Filter champions={championsList} handleSearch={handleSearch}
                         regions={Array.from(new Set(regions))}
                         roles={Array.from(new Set(roles))}
-                        getDifficultyName={getDifficultyName}
                 />
             </div>
             {filteredList.length > 0 ?
@@ -219,7 +223,8 @@ const Champions = () => {
                     <div className="w-screen flex justify-center items-center mt-8">
                         <ul className="flex flex-col flex-wrap sm:items-center justify-center sm:flex-row w-11/12">
                             {filteredList.map((champion) => (
-                                <li className={`border-[#937341] border-[2px] sm:m-5 flex-shrink-0 w-screen-97 sm:w-1/6 cards relative text-[#c4b998] cursor-pointer`}
+                                <li className={`border-[#937341] border-[2px] sm:m-5 flex-shrink-0 w-screen-97 sm:w-1/6 cards relative text-[#c4b998] cursor-pointer
+                                                       `}
                                     style={{
                                         backgroundImage: `url(${champion.image.uri})`,
                                         backgroundPosition: calculateBgPosition(champion.image.width, champion.image.height, champion.image.x, champion.image.y),
@@ -253,19 +258,19 @@ const Champions = () => {
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-red-500">
                                                         <img className="w-[16px]" src="src/assets/img/ico/attack.png"
-                                                             title="Attaque"/>
+                                                             title="Attaque" alt="attack_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.attack}</p>
                                                     </div>
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-[#937341] ">
                                                         <img className="w-[16px]" src="src/assets/img/ico/defense.png"
-                                                             title="Défense"/>
+                                                             title="Défense" alt="defense_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.defense}</p>
                                                     </div>
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-blue-300">
                                                         <img className="w-[14px]" src="src/assets/img/ico/magic.png"
-                                                             title="Magie"/>
+                                                             title="Magie" alt="magic_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.magic}</p>
                                                     </div>
                                                 </div>
@@ -278,13 +283,13 @@ const Champions = () => {
                     </div>
                 </>
                 :
-                (!isFiltering ?
+                (!isFilteredListEmpty ?
                         <div className="flex flex-row items-center justify-center w-screen-97 h-screen">
                             <span className="loading loading-ring text-info w-[150px]"></span>
                         </div>
                         :
                         <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
-                            <img src="../assets/img/png/cry_poro.png" className="w-[64px] h-[64px]"/>
+                            <img src="../../public/img/png/cry_poro.png" className="w-[64px] h-[64px]" alt="sad poro"/>
                             <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
                         </div>
                 )

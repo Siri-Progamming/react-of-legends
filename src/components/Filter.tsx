@@ -6,60 +6,91 @@ interface FilterProps {
     handleSearch: (championLists: ChampionList[]) => void
     regions: Array<string>
     roles: Array<string>
-    getDifficultyName: (difficulty: number) => string
+    //Déclaration de type de fonction en typescript :
+    //getDifficultyName: (difficulty: number) => string
 }
 
-const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles, getDifficultyName}) => {
-    const [search, setSearch] = useState<string>('')
-/*
-    const difficulties = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-*/
-    console.log(getDifficultyName)
-    const filterByName = (name: string) => {
-        setSearch(name)
-        handleSearch(champions.filter((champion) => {
-            return champion.name?.toLowerCase().startsWith(name.toLowerCase())
+const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles}) => {
+    const [regionFilter, setRegionFilter] = useState<string>('All')
+    const [roleFilter, setRoleFilter] = useState<string>('All')
+    const [difficultyFilter, setDifficultyFilter] = useState<string>('All')
+    const [nameFilter, setNameFilter] = useState<string>('')
+
+    const filterByName = (listToFilter: Array<ChampionList>): Array<ChampionList> => {
+        return listToFilter.filter((champion => {
+            return champion.name?.toLowerCase().startsWith(nameFilter.toLowerCase())
         }))
     }
 
-    const filterByRegion = (region: string) => {
-        console.log("Filter by region")
-        if (region === 'All') return handleSearch(champions)
-        handleSearch(champions.filter((champion) => {
-            return champion.region?.includes(region)
-        }))
+    const filterByRegion = (listToFilter: Array<ChampionList>): Array<ChampionList> => {
+        return listToFilter.filter((champion) => {
+            return champion.region?.includes(regionFilter)
+        })
     }
 
-    const filterByRole = (role: string) => {
-        console.log("Filter by role")
-        if (role === 'All') return handleSearch(champions)
-        handleSearch(champions.filter((champion) => {
-            console.log("champion roles : ", champion.roles)
-            console.log("role : ", role)
-            return champion.roles?.map((role) => role.toLowerCase()).includes(role.toLowerCase())
-        }))
+    const filterByRole = (listToFilter: Array<ChampionList>): Array<ChampionList> => {
+        return listToFilter.filter((champion) => {
+            return champion.roles?.map((role) => role.toLowerCase()).includes(roleFilter.toLowerCase())
+        })
     }
 
-/*    const filterByDifficulty = (difficulty: number) => {
+    const filterByDifficulty =(listToFilter: Array<ChampionList>): Array<ChampionList> => {
+        switch (difficultyFilter) {
+            case 'faible':
+               return listToFilter.filter((champion) => {
+                    return champion.info.difficulty < 4
+                })
+            case 'modérée':
+                return listToFilter.filter((champion) => {
+                    return champion.info.difficulty >= 4 && champion.info.difficulty < 8
+                })
+            case 'élevée':
+                return listToFilter.filter((champion) => {
+                    return champion.info.difficulty >= 8
+                })
+            default:
+                return listToFilter
+        }
+    }
 
-    }*/
+    const filter = () => {
+        let filteredList = champions
+        if (nameFilter === '' && regionFilter === 'All' && roleFilter === 'All' && difficultyFilter === 'All') {
+            filteredList = champions
+            handleSearch(filteredList)
+        }
+        if (nameFilter !== '') {
+            filteredList = filterByName(filteredList)
+        }
+        if (regionFilter !== 'All') {
+            filteredList = filterByRegion(filteredList)
+        }
+        if (roleFilter !== 'All') {
+            filteredList = filterByRole(filteredList)
+        }
+        if (difficultyFilter !== 'All') {
+            filteredList = filterByDifficulty(filteredList)
+        }
+        handleSearch(filteredList)
+    }
+
 
     useEffect(() => {
-        console.log(search)
-    }, [search]);
+        filter()
+    }, [nameFilter, regionFilter, roleFilter, difficultyFilter]);
 
     return (
-        <div>
-            <form className="flex flex-row flex-wrap justify-center">
+        <div id="filterbar">
+            <form className="flex flex-row flex-wrap justify-center items-center">
                 <label className="form-control">
                     <input type="text" placeholder="Nom" className="input input-bordered w-full max-w-xs"
-                           onChange={(e) => filterByName(e.target.value)}
+                           onChange={(e) => setNameFilter(e.target.value)}
                     />
                 </label>
 
                 <label className="form-control max-w-xs">
                     <select className="select select-bordered" defaultValue="Région"
-                            onChange={(e) => filterByRegion(e.target.value)}>
+                            onChange={(e) => setRegionFilter(e.target.value)}>
                         <option disabled value="Région">Région</option>
                         <option value="All">--ALL--</option>
                         {regions.sort((a, b) => a.localeCompare(b)).map((region) => {
@@ -70,7 +101,7 @@ const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles,
 
                 <label className="form-control max-w-xs">
                     <select className="select select-bordered" defaultValue="Rôle"
-                            onChange={(e) => filterByRole(e.target.value)}>
+                            onChange={(e) => setRoleFilter(e.target.value)}>
                         <option disabled value="Rôle">Rôle</option>
                         <option value="All">--ALL--</option>
                         {roles.sort((a, b) => a.localeCompare(b)).map((role) => {
@@ -80,14 +111,18 @@ const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles,
                 </label>
 
                 <label className="form-control  max-w-xs">
-                    <select className="select select-bordered" defaultValue="Difficulté">
+                    <select className="select select-bordered" defaultValue="Difficulté"
+                            onChange={(e) => setDifficultyFilter(e.target.value)}>
                         <option disabled value="Difficulté">Difficulté</option>
                         <option value="All">--ALL--</option>
-
+                        <option value="faible">★☆☆</option>
+                        <option value="modérée">★★☆</option>
+                        <option value="élevée">★★★</option>
                     </select>
                 </label>
 
             </form>
+            {/*<div>Champions : {}</div>*/}
         </div>
     );
 };
