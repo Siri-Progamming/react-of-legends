@@ -10,7 +10,6 @@ import {
     DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END,
     MEEP_API_CHAMPIONS_SPLASH
 } from "../constantes/constantes.ts";
-import {useChampionsContext} from "../context/useChampionsContext.tsx";
 
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
@@ -21,7 +20,6 @@ const Champions = () => {
     //const [isFilteringEffect, setIsFilteringEffect] = useState<boolean>(false)
     //const [difficulties, setDifficulties] = useState<Array<string>>([])
 
-    const {setChampionsContext} = useChampionsContext()
     const navigate = useNavigate()
 
 
@@ -129,7 +127,9 @@ const Champions = () => {
 
     useEffect(() => {
         setFilteredList(championsList)
-        if(championsList.length > 0) setChampionsContext(championsList)
+        if(championsList.length > 0){
+            localStorage.setItem('@champions', JSON.stringify(championsList))
+        }
     }, [championsList])
 
     function calculateBgPosition(width: number, height: number, x: number, y: number): string {
