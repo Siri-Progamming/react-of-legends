@@ -1,26 +1,19 @@
 import {AuthenticationContext} from "./AuthenticationContext.ts";
-import {ReactNode, useState} from "react";
-import {User, LoginInfos} from "./AuthenticationContext.ts";
+import {ReactNode, useEffect, useReducer} from "react";
+import { LOGIN, authReducer, initState} from "../reducers/AuthReducer"
 
 export const AuthenticationProvider = ({children}: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null)
-    const login = (loginInfos:LoginInfos) => {
-        setUser(loginInfos)
-    }
+    const [state, dispatch] = useReducer(authReducer, initState)
 
-    console.log(user)
-    const logout = () => {
-    }
+    useEffect(() => {
+        const user = localStorage.getItem('@user')
+        if (user) {
+            dispatch({ type: LOGIN, payload: JSON.parse(user) })
+        }
+    }, [])
 
     return (
-        <AuthenticationContext.Provider
-            value={{
-                user,
-                setUser,
-                login,
-                logout
-            }}
-        >
+        <AuthenticationContext.Provider value={{state, dispatch}}>
             {children}
         </AuthenticationContext.Provider>
     )
