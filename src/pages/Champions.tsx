@@ -11,8 +11,14 @@ import {
     MEEP_API_CHAMPIONS_SPLASH
 } from "../constantes/constantes.ts";
 import {useChampionsContext} from "../context/useChampionsContext.tsx";
-import {setChampionsIdLocalStorage, setChampionsRegionsLocalStorage, setChampionsRolesLocalStorage} from "../services/LocalStorageService.ts"
+import {
+    setChampionsIdLocalStorage,
+    setChampionsRegionsLocalStorage,
+    setChampionsRolesLocalStorage
+} from "../services/LocalStorageService.ts"
 import {AuthenticationContext} from "../context/AuthenticationContext.ts";
+import {db} from "../config/firebase.ts";
+import {addDoc, collection} from "firebase/firestore";
 
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
@@ -27,7 +33,7 @@ const Champions = () => {
 
     const navigate = useNavigate()
     const {setChampionsContext} = useChampionsContext()
-    const { state: { isLogged } } = useContext(AuthenticationContext);
+    const {state: {isLogged}} = useContext(AuthenticationContext);
 
     const getChampions = async () => {
         const DDRAGON_API_CHAMPIONS = DDRAGON_API_BEGIN + DDRAGON_API_LAST_VERSION + DDRAGON_API_AFTER_VERSION + DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END
@@ -48,7 +54,7 @@ const Champions = () => {
             console.error('Une erreur s\'est produite lors de la récupération des informations supplémentaires relatives aux champions ', error)
         }
     }
-    const createChampionsListTemp = async ():Promise<Array<ChampionList>> => {
+    const createChampionsListTemp = async (): Promise<Array<ChampionList>> => {
         const championsListTemp: Array<ChampionList> = []
         try {
             const dataChampions = await getChampions()
@@ -69,27 +75,27 @@ const Champions = () => {
                     if (champName === meepChampName) {
                         matchedSomeone = true
                         championsListTemp.push({
-                                id: dataChampions[champKeys[i]]['id'],
-                                key: dataChampions[champKeys[i]]['key'],
-                                name: dataChampions[champKeys[i]]['name'],
-                                title: dataChampions[champKeys[i]]['title'],
-                                releasedDate: dataChampions2[j]['release-date'],
-                                region: getRegionName(dataChampions2[j]['associated-faction-slug']),
-                                info: {
-                                    attack: dataChampions[champKeys[i]]['info']['attack'],
-                                    defense: dataChampions[champKeys[i]]['info']['defense'],
-                                    magic: dataChampions[champKeys[i]]['info']['magic'],
-                                    difficulty: dataChampions[champKeys[i]]['info']['difficulty'],
-                                },
-                                image: {
-                                    uri: dataChampions2[j]['image']['uri'],
-                                    width: dataChampions2[j]['image']['width'],
-                                    height: dataChampions2[j]['image']['height'],
-                                    x: dataChampions2[j]['image']['x'],
-                                    y: dataChampions2[j]['image']['y'],
-                                },
-                                roles: getRolesNames(dataChampions[champKeys[i]]['tags'])
-                            })
+                            id: dataChampions[champKeys[i]]['id'],
+                            key: dataChampions[champKeys[i]]['key'],
+                            name: dataChampions[champKeys[i]]['name'],
+                            title: dataChampions[champKeys[i]]['title'],
+                            releasedDate: dataChampions2[j]['release-date'],
+                            region: getRegionName(dataChampions2[j]['associated-faction-slug']),
+                            info: {
+                                attack: dataChampions[champKeys[i]]['info']['attack'],
+                                defense: dataChampions[champKeys[i]]['info']['defense'],
+                                magic: dataChampions[champKeys[i]]['info']['magic'],
+                                difficulty: dataChampions[champKeys[i]]['info']['difficulty'],
+                            },
+                            image: {
+                                uri: dataChampions2[j]['image']['uri'],
+                                width: dataChampions2[j]['image']['width'],
+                                height: dataChampions2[j]['image']['height'],
+                                x: dataChampions2[j]['image']['x'],
+                                y: dataChampions2[j]['image']['y'],
+                            },
+                            roles: getRolesNames(dataChampions[champKeys[i]]['tags'])
+                        })
                         setChampionsRegions(getRegionName(dataChampions2[j]['associated-faction-slug']))
                         setChampionsRoles(getRolesNames(dataChampions[champKeys[i]]['tags']))
                         break;
@@ -114,11 +120,11 @@ const Champions = () => {
 
     const handleOnClickCard = (champion: ChampionList) => {
         if (champion.id === undefined) return
-        navigate(`/champions/${champion.id}`, {state: {champion, from: location.pathname+'#'+champion.id}})
+        navigate(`/champions/${champion.id}`, {state: {champion, from: location.pathname + '#' + champion.id}})
         window.scrollTo(0, 0);
     }
     const handleSearch = (list: ChampionList[]) => {
-        if(list.length > 0) setIsFilteredListEmpty(false)
+        if (list.length > 0) setIsFilteredListEmpty(false)
         setFilteredList(list)
         //Juste pour le swag
         // const timeout2 = setTimeout(() => {
@@ -135,19 +141,19 @@ const Champions = () => {
     }
 
     useEffect(() => {
-        if(localStorage.getItem('@champions') != null){
+        if (localStorage.getItem('@champions') != null) {
             console.log("Loading champions list from local storage")
             setChampionsList(JSON.parse(localStorage.getItem('@champions') || '[]'))
             setRoles(JSON.parse(localStorage.getItem('@champions_roles') || '[]'))
             setRegions(JSON.parse(localStorage.getItem('@champions_regions') || '[]'))
-        }else{
+        } else {
             createChampionsList().then(() => console.log("Champions list created"))
         }
         //TODO Scroll sur le champion si on vient de la page du champion
     }, [])
 
     useEffect(() => {
-        if(championsList.length > 0 && localStorage.getItem('@champions') === null){
+        if (championsList.length > 0 && localStorage.getItem('@champions') === null) {
             console.log("Saving champions list in local storage")
             localStorage.setItem('@champions', JSON.stringify(championsList))
             setChampionsIdLocalStorage(championsList)
@@ -208,7 +214,20 @@ const Champions = () => {
         }
     }
 
-    const FavIcon = (championId:number) => {
+    const handleClickOnFavIcon = async (championId: number) => {
+        console.log("Click on fav icon of : ", championId)
+        await addDoc(collection(db, "favoris"), {
+            champion_id: championId,
+            user_id: localStorage.getItem('@user') !== null ? JSON.parse(localStorage.getItem('@user') || '').uid : null
+        })
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    }
+    const FavIcon = (championId: number) => {
         //TODO : Favoris dans localstorage ?
         // let user_uid : string|null = null
         // if(localStorage.getItem('@user') !== null){
@@ -234,7 +253,10 @@ const Champions = () => {
                     className="relative hidden"
                     style={{zIndex: 1}}
                     id="hidden-full-heart"
-                    onClick={() => console.log("clicked")}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleClickOnFavIcon(championId)
+                    }}
                 />
                 <div
                     className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-[#DF1D24] to-[#DF1D24] filter blur-[7px] rounded-full"
@@ -257,7 +279,7 @@ const Champions = () => {
         })
     }
 
-    function setRegionsAndRoles(){
+    function setRegionsAndRoles() {
         console.log("Setting regions and roles")
         setRegions(Array.from(new Set(tempRegions)).map((region) => region.charAt(0).toUpperCase() + region.slice(1)))
         setRoles(Array.from(new Set(tempRoles)).map((role) => role.charAt(0).toUpperCase() + role.slice(1)))
@@ -315,19 +337,22 @@ const Champions = () => {
                                                 <div className="flex flex-row items-center justify-center">
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-red-500">
-                                                        <img className="w-[16px]" src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fattack.png?alt=media&token=3d02b109-07a9-46ce-9215-f2ba16f6f2f4"
+                                                        <img className="w-[16px]"
+                                                             src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fattack.png?alt=media&token=3d02b109-07a9-46ce-9215-f2ba16f6f2f4"
                                                              title="Attaque" alt="attack_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.attack}</p>
                                                     </div>
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-[#937341] ">
-                                                        <img className="w-[16px]" src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fdefense.png?alt=media&token=a38c9379-bb05-477b-b3d7-7bfcbf87e73a"
+                                                        <img className="w-[16px]"
+                                                             src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fdefense.png?alt=media&token=a38c9379-bb05-477b-b3d7-7bfcbf87e73a"
                                                              title="Défense" alt="defense_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.defense}</p>
                                                     </div>
                                                     <div
                                                         className="flex flex-row items-center justify-center pl-2 pr-2 text-blue-300">
-                                                        <img className="w-[14px]" src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fmagic.png?alt=media&token=8028058e-3813-49b6-813f-8f0709d5f5de"
+                                                        <img className="w-[14px]"
+                                                             src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fmagic.png?alt=media&token=8028058e-3813-49b6-813f-8f0709d5f5de"
                                                              title="Magie" alt="magic_ico"/>
                                                         <p className="pl-1 pr-1">{champion.info?.magic}</p>
                                                     </div>
@@ -347,7 +372,9 @@ const Champions = () => {
                         </div>
                         :
                         <div className="flex flex-row items-center justify-center w-screen-97 h-fit">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/png%2Fcry_poro.png?alt=media&token=a603f157-9ff9-4fdf-a8b2-839aae56c141" className="w-[64px] h-[64px]" alt="sad poro"/>
+                            <img
+                                src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/png%2Fcry_poro.png?alt=media&token=a603f157-9ff9-4fdf-a8b2-839aae56c141"
+                                className="w-[64px] h-[64px]" alt="sad poro"/>
                             <p className="p-5">Aucun champion ne correspond aux critères du filtre.</p>
                         </div>
                 )

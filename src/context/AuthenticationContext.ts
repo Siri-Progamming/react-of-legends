@@ -7,7 +7,7 @@ import User = firebase.User;
 export interface State{
     isLogged: boolean,
     isLoading: boolean,
-    userInfos: LoginInfos | null,
+    userInfos: null,
 }
 export interface LoginInfos {
     email: string,
