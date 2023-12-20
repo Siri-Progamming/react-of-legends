@@ -60,7 +60,7 @@ function Login() {
                         </button>
                     </form>
                 </div>
-                <img src="public/img/kaisa02.png" alt="Ahri" className="max-h-[600px] hidden sm:block "/>
+                <img src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/characters%2Fkaisa02.png?alt=media&token=82534050-c2dd-48e8-b3d6-365c154d9116" alt="Kaisa" className="max-h-[600px] hidden sm:block "/>
             </div>
         </div>
     );

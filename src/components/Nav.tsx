@@ -5,6 +5,7 @@ import {AuthenticationContext} from "../context/AuthenticationContext.ts";
 import {LOGOUT} from "../reducers/AuthReducer"
 import {auth} from "../config/firebase";
 import {signOut} from "firebase/auth"
+import firebase from "firebase/compat/app";
 
 const Nav: React.FC = () => {
     const {state, dispatch} = useContext(AuthenticationContext)
@@ -12,14 +13,14 @@ const Nav: React.FC = () => {
         await signOut(auth)
             .then(() => {
                 localStorage.removeItem('@user')
-                dispatch({type: LOGOUT, payload: null})
+                dispatch({type: LOGOUT})
             })
             .catch(error => console.log('SignOut error ->', error))
     }
 
     return (
         <>
-            <header className="navbar nav-divider sm:p-5 bg-[#1B1827]">
+            <header className="navbar nav-divider sm:p-5 bg-[#1B1827]" id="nav">
                 <div className="navbar-start sm:ml-5">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -53,8 +54,8 @@ const Nav: React.FC = () => {
                     <div className="dropdown dropdown-end navbar-end text-right mr-5">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-20 rounded-full">
-                                {state.isLogged ? <img alt="Profil icon" src="https://i.redd.it/ztufjdppq8r11.jpg"/> :
-                                    <img alt="Profil icon" src='public/img/png/nouser.png'/>}
+                                {state.isLogged ? <img alt="Profil icon" src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/avatar%2Fahri.jpg?alt=media&token=db31c50c-95c4-4656-851a-28f9e77cec3f"/> :
+                                    <img alt="nouser Profil icon" src='https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/avatar%2Fnouser.png?alt=media&token=f2834d5b-37a4-4dc7-b33e-23a1bbe8e6b8'/>}
                                     </div>
                                     </div>
                                     <ul tabIndex={0}

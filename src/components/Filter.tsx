@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({champions, handleSearch, regions, roles}
 
     const filterByRegion = (listToFilter: Array<ChampionList>): Array<ChampionList> => {
         return listToFilter.filter((champion) => {
-            return champion.region?.includes(regionFilter)
+            return champion.region?.includes(regionFilter.toLowerCase())
         })
     }
 

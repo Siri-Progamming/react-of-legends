@@ -36,7 +36,9 @@ const Inscription = () => {
         <div id="register-page">
             <div className="flex flex-row justify-center items-center sm:h-[calc(100vh_-_var(--nav-height,0))]">
                 <div className="background-inscription mt-[--nav-height] hidden sm:block"></div>
-                <img src="public/img/seraphine01.png" alt="Kaisa" className="max-h-[600px] hidden sm:block"/>
+                <img
+                    src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/characters%2Fseraphine01.png?alt=media&token=23443599-83c5-4c82-8051-cf1c45626679"
+                    alt="Seraphine" className="max-h-[600px] hidden sm:block"/>
                 <div id="register-box" className="pr-36">
                     <form className="form-control w-full max-w-xs mx-auto">
                         <h2 className="mb-[8%] bg-gradient-to-br from-[#AB5CCB] via-[#A69BD4] to-[#65ECE9] text-transparent bg-clip-text">Inscription</h2>

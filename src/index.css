@@ -51,7 +51,7 @@
 }
 
 .background-home {
-    background-image: url('public/img/kda-wll06.jpg'); /*1,6,7,8,9*/
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/kda-wll06.jpg?alt=media&token=7f4a67b8-556d-4b41-bdc4-8a8cc08526ba'); /*1,6,7,8,9*/
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
@@ -66,7 +66,7 @@
     height: 100vh;
 }
 .background-inscription {
-    background-image: url('public/img/wll-holo-04.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/wll-holo-04.jpg?alt=media&token=ee766603-3bd1-49ee-ba4b-53adbd10879b'); /* holo4 */
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
@@ -78,13 +78,13 @@
     filter: hue-rotate(-25deg) blur(1px) contrast(1.4);
     background-position: top;
     z-index: -1;
-    mask: url('public/img/mask/fullcircle1-2.png');
+    mask: url('https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/mask%2Ffullcircle1-2.png?alt=media&token=93478d87-85ca-46fd-afcf-d7effdceda2a'); /* fullcircle1-2 */
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: 700px, auto, contain;
 }
 .background-login {
-    background-image: url('public/img/wll-holo-04.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/wll-holo-04.jpg?alt=media&token=ee766603-3bd1-49ee-ba4b-53adbd10879b'); /* holo4 */
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
@@ -96,7 +96,7 @@
     filter: hue-rotate(-45deg) blur(1px) contrast(1.4);
     background-position: top;
     z-index: -1;
-    mask: url('public/img/mask/fullcircle2-1.png');
+    mask: url('https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/mask%2Ffullcircle2-1.png?alt=media&token=b2e784f9-eb5f-4149-95cb-54a9d367af45'); /* fullcircle2-1 */
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: 700px, auto, contain;
@@ -133,9 +133,6 @@
 }
 #champion-page-body{
     box-sizing: border-box;
-    margin: auto;
-    max-width: 65%;
-    padding: 0.625rem;
 }
 #champion-page-image{
     padding-bottom: 59.01%;
@@ -450,10 +447,6 @@ label select option:hover{
     margin-right: 10px;
     margin-top: -20px;
     text-shadow: 1px 1px 0 #fff;
-}
-
-#champion-lore {
-    min-width: 320px;
 }
 
 .fading {

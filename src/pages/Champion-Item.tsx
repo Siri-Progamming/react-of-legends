@@ -3,11 +3,15 @@ import TextToSpeech from "../components/TextToSpeech.tsx"
 import {Champion, ChampionList} from "../interfaces/Champion.ts"
 import axios from "axios";
 import '../index.css'
-import {useParams, useLocation} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {
-    DDRAGON_API_BEGIN, DDRAGON_API_LAST_VERSION, DDRAGON_API_AFTER_VERSION, DDRAGON_API_AFTER_LOCALE_CHAMPION,
+    DDRAGON_API_AFTER_LOCALE_CHAMPION,
     DDRAGON_API_AFTER_LOCALE_CHAMPION_END,
-    MEEP_API_STORY_BEGIN, MEEP_API_STORY_END
+    DDRAGON_API_AFTER_VERSION,
+    DDRAGON_API_BEGIN,
+    DDRAGON_API_LAST_VERSION,
+    MEEP_API_STORY_BEGIN,
+    MEEP_API_STORY_END
 } from "../constantes/constantes.ts";
 import {useChampionsContext} from "../context/useChampionsContext.tsx";
 
@@ -18,17 +22,26 @@ import {useChampionsContext} from "../context/useChampionsContext.tsx";
 }*/
 
 const ChampionItem: React.FC = () => {
-    const idChamp = useParams().idChamp as string;
     const [champion, setChampion] = useState<Champion>(initChampion);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    //TODO : Il faut que ça fonctionne quand on tape l'url directement
-    const location = useLocation();
+    const {state} = useLocation();
+    const navigate = useNavigate()
+    const idChamp = checkIdChamp(useParams().idChamp as string)
     const {championsContext} = useChampionsContext()
-    const [championInfoFromList, setChampionInfoFromList] = useState<ChampionList>(championsContext.find((champ: ChampionList) => champ.id === idChamp) as ChampionList);
-    if (location.state === null && championsContext.length > 0) {
-        console.log("ChampionsContext : ", championsContext)
-        setChampionInfoFromList(championsContext.find((champ: ChampionList) => champ.id === idChamp) as ChampionList)
+    const championInfoFromChampionsPage = getChampionFromChampionsPage()
+
+    function getChampionFromChampionsPage(): ChampionList {
+        if (state.champion === null || championsContext.length === 0) {
+            const storagedChampions = localStorage.getItem('@champions')
+            if (storagedChampions !== null) {
+                return JSON.parse(storagedChampions).find((champ: ChampionList) => champ.id?.toLowerCase() === idChamp?.toLowerCase()) as ChampionList
+            } else {
+                return {} as ChampionList
+            }
+        } else {
+            return championsContext.find((champ: ChampionList) => champ.id?.toLowerCase() === idChamp?.toLowerCase()) as ChampionList
+        }
     }
 
     const getChampion = async (id: string) => {
@@ -54,8 +67,8 @@ const ChampionItem: React.FC = () => {
             console.error('Error : ', error)
         }
     }
-
     const createChampion = async (id: string) => {
+
         try {
             const championData = await getChampion(id)
             const championStoryAndRel = await getChampionStory(id)
@@ -75,20 +88,20 @@ const ChampionItem: React.FC = () => {
                 name: championData.name,
                 title: championData.title,
                 image: {
-                    uri: championInfoFromList.image.uri,
-                    width: championInfoFromList.image.width,
-                    height: championInfoFromList.image.height,
-                    x: championInfoFromList.image.x,
-                    y: championInfoFromList.image.y,
+                    uri: championInfoFromChampionsPage.image.uri,
+                    width: championInfoFromChampionsPage.image.width,
+                    height: championInfoFromChampionsPage.image.height,
+                    x: championInfoFromChampionsPage.image.x,
+                    y: championInfoFromChampionsPage.image.y,
                 },
                 shortLore: dataChamp['biography']['short'],
                 fullLore: dataChamp['biography']['full'],
                 quote: dataChamp['biography']['quote'],
                 'related-champions': relatedChampions
-                //TODO images
                 //TODO Skins boucle -> nums
                 //TODO allyTips
                 //TODO enemyTips
+                //TODO related-champions
             }));
         } catch (error) {
             console.error('Error : ', error)
@@ -134,21 +147,25 @@ const ChampionItem: React.FC = () => {
         }
     }
 
+    function checkIdChamp(id: string): string {
+        const idChampFromLocalStorage = localStorage.getItem('@champions_id')
+        if (idChampFromLocalStorage !== null) {
+            for (let i = 0; i < JSON.parse(idChampFromLocalStorage).length; i++) {
+                if (JSON.parse(idChampFromLocalStorage)[i].toLowerCase() === id.toLowerCase()) {
+                    return JSON.parse(idChampFromLocalStorage)[i]
+                }
+            }
+        }
+        return id
+    }
+
     useEffect(() => {
-        console.log("Champion Info from champions list : ", championInfoFromList)
         createChampion(idChamp)
     }, []);
-
     useEffect(() => {
-
-        console.log("Champion id : ", champion.id)
-        console.log("Champion key : ", champion.key)
-        console.log("Champion Objet : ", champion)
-
-        if (champion.key !== 0) {
+        if (champion.key !== 0 && champion.image.uri !== '') {
             setIsLoading(true);
         }
-
     }, [champion]);
 
     function styleParagraph(text: string | undefined): string {
@@ -157,34 +174,40 @@ const ChampionItem: React.FC = () => {
     }
 
     return (
-        <div className="relative">
-            <div id="background-champion-page" className="" style={{backgroundImage: `url(${champion.image.uri})`}}></div>
-            <div id="champion-page-body">
-                <div id="champion-page-image" className="relative w-full">
-                    <img src={champion.image.uri} alt={champion.name} className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-20"/>
-                </div>
-                <div id="champion-page-infos">
-                    <h1 className="text-[#ff] text-6xl sm:text-8xl">{champion.name}</h1>
-                    {isLoading ? (
-                            <>
-                                <p className="mb-3 text-[#c4b998] text-xl sm:text-2xl"dangerouslySetInnerHTML={{__html: styleParagraph(champion?.quote)}}/>
+        <div className="relative h-fit w-fit" id="champion-page">
+            {isLoading ? (
+                    <>
+                        <button className="mt-2 sm:mt-0 sm:absolute left-2 top-2 sm:left-10 sm:top-10 text-white btn-xs sm:btn-sm md:btn-md lg:btn-md btn btn-circle btn-outline"
+                                onClick={() => navigate(state?.from)}
+                        >⬅</button>
+                        <div id="background-champion-page" className=""
+                             style={{backgroundImage: `url(${champion.image.uri})`}}></div>
+                        <div id="champion-page-body" className="max-w-[90%] sm:max-w-[65%] p-0 sm:p-2.5 mx-auto my-auto">
+                            <div id="champion-page-image" className="relative w-full">
+                                <img src={champion.image.uri} alt={champion.name}
+                                     className="absolute top-0 left-0 w-full h-full bg-cover bg-center z-20"/>
+                            </div>
+                            <div id="champion-page-infos">
+                                <h1 className="text-[#ff] text-6xl sm:text-8xl">{champion.name}</h1>
+                                <p className="mb-3 text-[#c4b998] text-xl sm:text-2xl"
+                                   dangerouslySetInnerHTML={{__html: styleParagraph(champion?.quote)}}/>
                                 <div
-                                    className="w-[30%] mx-auto p-5 bg-black bg-opacity-[55%] text-justify border-[#937341] border-[2px]"
+                                    className="min-w-[288px] sm:w-[75%] mx-auto p-5 bg-black bg-opacity-[55%] text-justify border-[#937341] border-[2px]"
                                     id="champion-lore">
                                     {/*<p className="mb-3" dangerouslySetInnerHTML={{__html: champion?.shortLore}}/>*/}
-                                    <p className="mb-3 " dangerouslySetInnerHTML={{__html: styleParagraph(champion?.fullLore)}}/>
+                                    <p className="mb-3 "
+                                       dangerouslySetInnerHTML={{__html: styleParagraph(champion?.fullLore)}}/>
                                     <TextToSpeech text={champion?.fullLore ?? ''}/>
                                 </div>
-                            </>
-                        )
-                        :
-                        <div className="flex flex-row items-center justify-center w-screen-97 h-screen">
-                            <span className="loading loading-ring text-info w-[150px]"></span>
-                        </div>}
-                </div>
-            </div>
+                            </div>
+                        </div>
+                    </>
+                )
+                :
+                <div className="flex flex-row items-center justify-center w-screen-97 h-screen">
+                    <span className="loading loading-ring text-info w-[150px]"></span>
+                </div>}
         </div>
     )
 }
-
 export default ChampionItem
