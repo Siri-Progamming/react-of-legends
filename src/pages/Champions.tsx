@@ -14,11 +14,13 @@ import {useChampionsContext} from "../context/useChampionsContext.tsx";
 import {
     setChampionsIdLocalStorage,
     setChampionsRegionsLocalStorage,
-    setChampionsRolesLocalStorage
+    setChampionsRolesLocalStorage,
+    setFavoriteChampionsLocalStorage
 } from "../services/LocalStorageService.ts"
 import {AuthenticationContext} from "../context/AuthenticationContext.ts";
+import FavIcon from "../components/FavIcon.tsx";
+import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "../config/firebase.ts";
-import {addDoc, collection} from "firebase/firestore";
 
 const Champions = () => {
     const [championsList, setChampionsList] = useState<Array<ChampionList>>([])
@@ -28,13 +30,36 @@ const Champions = () => {
     const [roles, setRoles] = useState<Array<string>>([])
     const [tempRegions, setTempRegions] = useState<Array<string>>([])
     const [tempRoles, setTempRoles] = useState<Array<string>>([])
-    //const [isFilteringEffect, setIsFilteringEffect] = useState<boolean>(false)
-    //const [difficulties, setDifficulties] = useState<Array<string>>([])
+    const [favorites, setFavorites] = useState<ChampionList[]>([])
 
     const navigate = useNavigate()
     const {setChampionsContext} = useChampionsContext()
     const {state: {isLogged}} = useContext(AuthenticationContext);
+    const {state: {userInfos}} = useContext(AuthenticationContext)
 
+    // function getFavoriteChampionsLocalStorage (): ChampionList[]{
+    //     const favoriteChampions = localStorage.getItem('@favoriteChampions')
+    //     if (favoriteChampions != null) {
+    //         return JSON.parse(favoriteChampions)
+    //     } else {
+    //         return []
+    //     }
+    // }
+    async function getFavoriteChampionsFromDB (): Promise<number[]>{
+        const favorites: Array<number> = []
+        if (userInfos) {
+            // @ts-expect-error userInfos ne peut pas être null car on est dans une route protégée
+            const q = query(collection(db, "favoris"), where("user_id", "==", userInfos.uid));
+            const querySnapshot = await getDocs(q);
+
+            querySnapshot.forEach((doc) => {
+                favorites.push(doc.data().champion_id)
+            })
+            return favorites
+        }else{
+            return []
+        }
+    }
     const getChampions = async () => {
         const DDRAGON_API_CHAMPIONS = DDRAGON_API_BEGIN + DDRAGON_API_LAST_VERSION + DDRAGON_API_AFTER_VERSION + DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END
         try {
@@ -112,19 +137,27 @@ const Champions = () => {
             return []
         }
     }
-
     const createChampionsList = async () => {
         const championsListTemp = await createChampionsListTemp()
         setChampionsList(championsListTemp)
     }
 
+    const handleClickOnFav = (champion: ChampionList) => {
+        if (favorites.includes(champion)) {
+            setFavorites(favorites.filter((fav) => fav !== champion))
+        } else {
+            setFavorites(prevFavorites => [...prevFavorites, champion])
+        }
+    }
     const handleOnClickCard = (champion: ChampionList) => {
         if (champion.id === undefined) return
         navigate(`/champions/${champion.id}`, {state: {champion, from: location.pathname + '#' + champion.id}})
         window.scrollTo(0, 0);
     }
     const handleSearch = (list: ChampionList[]) => {
-        if (list.length > 0) setIsFilteredListEmpty(false)
+        if (list.length > 0) {
+            setIsFilteredListEmpty(false)
+        } else setIsFilteredListEmpty(true)
         setFilteredList(list)
         //Juste pour le swag
         // const timeout2 = setTimeout(() => {
@@ -151,7 +184,6 @@ const Champions = () => {
         }
         //TODO Scroll sur le champion si on vient de la page du champion
     }, [])
-
     useEffect(() => {
         if (championsList.length > 0 && localStorage.getItem('@champions') === null) {
             console.log("Saving champions list in local storage")
@@ -160,8 +192,17 @@ const Champions = () => {
             setRegionsAndRoles()
         }
         setFilteredList(championsList)
+        getFavoriteChampionsFromDB().then(favorites => setFavorites(championsList.filter(champion => favorites.includes(champion.key))))
         setChampionsContext(championsList)
     }, [championsList])
+    useEffect(() => {
+        setFavoriteChampionsLocalStorage(favorites)
+        console.log("Favorites : ", favorites)
+    }, [favorites]);
+    useEffect(() => {
+        setChampionsRegionsLocalStorage(regions)
+        setChampionsRolesLocalStorage(roles)
+    }, [regions, roles]);
 
     function calculateBgPosition(width: number, height: number, x: number, y: number): string {
         const background_position_x = (x / width) * 100
@@ -214,58 +255,6 @@ const Champions = () => {
         }
     }
 
-    const handleClickOnFavIcon = async (championId: number) => {
-        console.log("Click on fav icon of : ", championId)
-        await addDoc(collection(db, "favoris"), {
-            champion_id: championId,
-            user_id: localStorage.getItem('@user') !== null ? JSON.parse(localStorage.getItem('@user') || '').uid : null
-        })
-            .then(() => {
-                console.log("Document successfully written!");
-            })
-            .catch((error) => {
-                console.error("Error writing document: ", error);
-            });
-    }
-    const FavIcon = (championId: number) => {
-        //TODO : Favoris dans localstorage ?
-        // let user_uid : string|null = null
-        // if(localStorage.getItem('@user') !== null){
-        //     const userData = JSON.parse(localStorage.getItem('@user') || '')
-        //     if(userData && userData !== ''){
-        //         user_uid = userData.uid
-        //     }
-        // }
-
-
-        return (
-            <div className="champ-favorite-card mt-2 mr-2">
-                <img
-                    src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fheart_empty.png?alt=media&token=3dee63cf-c111-4e13-b3ea-238c7e794390"
-                    alt="Empty Heart"
-                    className="relative hover:hidden"
-                    style={{zIndex: 1}}
-                    id="empty-heart"
-                />
-                <img
-                    src="https://firebasestorage.googleapis.com/v0/b/loreact-666d4.appspot.com/o/ico%2Fheart_full.png?alt=media&token=fc485a8a-fa7a-427c-a9de-773caa0beca0"
-                    alt="Full Heart"
-                    className="relative hidden"
-                    style={{zIndex: 1}}
-                    id="hidden-full-heart"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleClickOnFavIcon(championId)
-                    }}
-                />
-                <div
-                    className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-[#DF1D24] to-[#DF1D24] filter blur-[7px] rounded-full"
-                    style={{zIndex: -1}}
-                ></div>
-            </div>
-        );
-    };
-
     const setChampionsRegions = (region: string) => {
         if (!regions.includes(region)) {
             setTempRegions(prevTempRegions => [...prevTempRegions, region])
@@ -285,10 +274,6 @@ const Champions = () => {
         setRoles(Array.from(new Set(tempRoles)).map((role) => role.charAt(0).toUpperCase() + role.slice(1)))
     }
 
-    useEffect(() => {
-        setChampionsRegionsLocalStorage(regions)
-        setChampionsRolesLocalStorage(roles)
-    }, [regions, roles]);
     return (
         <>
             <div className="my-8 mx-auto">
@@ -297,7 +282,6 @@ const Champions = () => {
                         roles={roles}
                 />
             </div>
-
             {filteredList.length > 0 ?
                 <>
                     <div className="w-screen flex justify-center items-center mt-8">
@@ -320,7 +304,12 @@ const Champions = () => {
                                                 className="champ-difficulty-card flex flex-row ml-2 text-[#937341] text-3xl">
                                                 {getDifficultyName(champion.info?.difficulty)}
                                             </div>
-                                            {isLogged && <FavIcon championId={champion.key}/>}
+                                            {isLogged &&
+                                                <FavIcon champion={champion}
+                                                         handleClickOnFav={() => handleClickOnFav(champion)}
+                                                         isFavorite={favorites.includes(champion)}/>
+                                            }
+                                            {/*TODO Ajouter un coeur apparent si le champion est en favoris*/}
                                         </div>
                                         <div
                                             className="card-bottom bg-black bg-opacity-70 backdrop-blur-sm  border-t border-[#937341]">

@@ -19,3 +19,8 @@ export const setChampionsRegionsLocalStorage = (regions:string[]) => {
 export const setChampionsRolesLocalStorage = (roles:string[]) => {
     localStorage.setItem('@champions_roles', JSON.stringify(roles))
 }
+
+export const setFavoriteChampionsLocalStorage= (champions:ChampionList[]) => {
+    localStorage.setItem('@favorite_champions', JSON.stringify(champions))
+}
+

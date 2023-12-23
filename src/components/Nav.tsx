@@ -5,7 +5,6 @@ import {AuthenticationContext} from "../context/AuthenticationContext.ts";
 import {LOGOUT} from "../reducers/AuthReducer"
 import {auth} from "../config/firebase";
 import {signOut} from "firebase/auth"
-import firebase from "firebase/compat/app";
 
 const Nav: React.FC = () => {
     const {state, dispatch} = useContext(AuthenticationContext)
@@ -13,6 +12,7 @@ const Nav: React.FC = () => {
         await signOut(auth)
             .then(() => {
                 localStorage.removeItem('@user')
+                // @ts-expect-error just trust me xD
                 dispatch({type: LOGOUT})
             })
             .catch(error => console.log('SignOut error ->', error))

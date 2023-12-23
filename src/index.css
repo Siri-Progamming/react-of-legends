@@ -417,13 +417,6 @@ label select option:hover{
     width: 20px;
 }
 
-.cards .champ-favorite-card {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 24px;
-}
-
 @keyframes pulse {
     0% {
         transform: scale(1);

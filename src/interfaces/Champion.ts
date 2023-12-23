@@ -1,6 +1,6 @@
 export interface ChampionList {
-    id?: string | '';
-    key?: number | 0;
+    id: string | '';
+    key: number | 0;
     name?: string | '';
     title?: string | '';
     'releasedDate'?: Date | null;

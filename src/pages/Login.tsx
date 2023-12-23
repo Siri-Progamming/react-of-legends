@@ -20,6 +20,7 @@ function Login() {
         try {
             const userResponse = await signInWithEmailAndPassword(auth, email, password)
             if (userResponse.user) {
+                // @ts-expect-error payload
                 dispatch({type: LOGIN, payload: userResponse.user})
                 localStorage.setItem('@user', JSON.stringify(userResponse.user))
                 navigate(state?.from ? state.from : '/')
@@ -53,7 +54,7 @@ function Login() {
                                    onChange={e => setPassword(e.target.value)}
                                    className="input input-bordered w-full max-w-xs"/>
                         </div>
-                        {error && <p style={{color: 'red'}}>{error}</p>}
+                        {error && <p className={`text-[#a974ce] mt-[5px] max-w-[250px]`}>{error}</p>}
                         <button onClick={onLogin} disabled={email === '' || password === ''}
                                 className="btn btn-outline btn-secondary btn-xs sm:btn-sm md:btn-md lg:btn-md mt-[20px]">Se
                             connecter
