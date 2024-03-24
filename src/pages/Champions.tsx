@@ -48,7 +48,6 @@ const Champions = () => {
     async function getFavoriteChampionsFromDB (): Promise<number[]>{
         const favorites: Array<number> = []
         if (userInfos) {
-            // @ts-expect-error userInfos ne peut pas être null car on est dans une route protégée
             const q = query(collection(db, "favoris"), where("user_id", "==", userInfos.uid));
             const querySnapshot = await getDocs(q);
 

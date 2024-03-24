@@ -21,7 +21,8 @@ export const LOL_GAMEPLAY_JSON_END: string = '/page-data.json'
 
 /////////API DDRAGON
 export const DDRAGON_API_BEGIN:string = 'https://ddragon.leagueoflegends.com/cdn/'
-export const DDRAGON_API_LAST_VERSION:string = '14.5.1'
+//https://ddragon.leagueoflegends.com/api/versions.json
+export const DDRAGON_API_LAST_VERSION:string = '14.6.1'
 export const DDRAGON_API_AFTER_VERSION:string = '/data/'+LOCALE
 
 export const DDRAGON_API_AFTER_LOCALE_CHAMPIONS_END:string = '/champion.json'

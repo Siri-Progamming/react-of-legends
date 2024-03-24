@@ -10,7 +10,7 @@ export const initState:State = {
 
 export interface Dispatch {
     type: string;
-    payload: User;
+    payload: User | null;
 }
 
 export const LOGIN:string = "LOGIN"
@@ -18,7 +18,7 @@ export const LOGOUT:string = "LOGOUT"
 export const SET_LOADING:string = "SET_LOADING"
 export const UPDATE_USER_INFOS:string = "UPDATE_USER_INFOS"
 
-export const authReducer = (state:State, action:Dispatch) => {
+export const authReducer = (state:State, action:Dispatch):State => {
     switch (action.type) {
         case LOGIN:
             return {
